@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/aboutFragment"
-        android:title="@string/about" />
+        android:id="@+id/homeFragment"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="@string/home" />
     <item
-        android:id="@+id/myPlacesFragment"
-        android:title="My places" />
+        android:id="@+id/aboutFragment"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/about" />
 </menu>
