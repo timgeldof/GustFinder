@@ -4,4 +4,5 @@
     <string name="app_title">GustFinder</string>
     <string name="my_locations">Mijn plaatsen</string>
     <string name="my_map">Mijn kaart</string>
+    <string name="other_resources">Interessante bronnen</string>
 </resources>
