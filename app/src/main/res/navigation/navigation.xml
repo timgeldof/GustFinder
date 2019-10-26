@@ -17,4 +17,8 @@
         android:id="@+id/myPlacesFragment"
         android:name="com.timgeldof.gustfinder.MyPlacesFragment"
         android:label="MyPlacesFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.timgeldof.gustfinder.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>
