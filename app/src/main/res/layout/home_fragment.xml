@@ -6,6 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorLightBlue"
         android:orientation="vertical">
 
         <ImageView
@@ -19,13 +20,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/wind_icon" />
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/text_my_places"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/quicksand"
             android:text="@string/my_locations"
             android:textSize="@dimen/Title"
             app:layout_constraintBottom_toTopOf="@+id/text_my_map"
@@ -37,6 +39,7 @@
             android:id="@+id/text_my_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
             android:text="@string/my_map"
             android:textSize="@dimen/Title"
             app:layout_constraintBottom_toTopOf="@+id/text_interesting_resources"
@@ -48,6 +51,7 @@
             android:id="@+id/text_interesting_resources"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
             android:text="@string/other_resources"
             android:textSize="@dimen/Title"
             app:layout_constraintBottom_toBottomOf="parent"

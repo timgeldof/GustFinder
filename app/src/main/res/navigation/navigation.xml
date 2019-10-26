@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.timgeldof.gustfinder.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="Home">
         <action
             android:id="@+id/action_homeFragment_to_myPlacesFragment"
             app:destination="@id/myPlacesFragment" />
@@ -16,9 +16,9 @@
     <fragment
         android:id="@+id/myPlacesFragment"
         android:name="com.timgeldof.gustfinder.MyPlacesFragment"
-        android:label="MyPlacesFragment" />
+        android:label="My places" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.timgeldof.gustfinder.AboutFragment"
-        android:label="AboutFragment" />
+        android:label="About" />
 </navigation>
