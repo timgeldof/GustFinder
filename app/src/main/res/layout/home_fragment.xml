@@ -13,51 +13,77 @@
             android:id="@+id/imageView2"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:contentDescription="@string/descr_wind_icon"
-            app:layout_constraintBottom_toTopOf="@+id/text_my_places"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
-        <TextView
-            android:id="@+id/text_my_places"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/quicksand"
-            android:text="@string/my_locations"
-            android:textSize="@dimen/Title"
-            app:layout_constraintBottom_toTopOf="@+id/text_my_map"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/text_my_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand"
-            android:text="@string/my_map"
-            android:textSize="@dimen/Title"
-            app:layout_constraintBottom_toTopOf="@+id/text_interesting_resources"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_my_places" />
-
-        <TextView
-            android:id="@+id/text_interesting_resources"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand"
-            android:text="@string/other_resources"
-            android:textSize="@dimen/Title"
+            android:background="@color/colorDarkBlue"
+            android:textAlignment="center"
+            app:cardElevation="8dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_my_map" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorDarkBlue"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/title_padding"
+                android:textAlignment="center">
+
+                <TextView
+                    android:id="@+id/text_my_places"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_cardview_options"
+                    android:layout_marginBottom="@dimen/margin_cardview_options"
+                    android:fontFamily="@font/quicksand"
+                    android:text="@string/my_locations"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSand"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_my_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_cardview_options"
+                    android:layout_marginBottom="@dimen/margin_cardview_options"
+                    android:fontFamily="@font/quicksand"
+                    android:text="@string/my_map"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSand"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_interesting_resources"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_cardview_options"
+                    android:layout_marginBottom="@dimen/margin_cardview_options"
+                    android:fontFamily="@font/quicksand"
+                    android:text="@string/other_resources"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSand"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

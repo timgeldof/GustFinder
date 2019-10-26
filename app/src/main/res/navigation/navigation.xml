@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.timgeldof.gustfinder.HomeFragment"
+        android:name="com.timgeldof.gustfinder.screens.home.HomeFragment"
         android:label="Home">
         <action
             android:id="@+id/action_homeFragment_to_myPlacesFragment"
@@ -19,10 +19,10 @@
     </fragment>
     <fragment
         android:id="@+id/myPlacesFragment"
-        android:name="com.timgeldof.gustfinder.MyPlacesFragment"
+        android:name="com.timgeldof.gustfinder.screens.myplaces.MyPlacesFragment"
         android:label="My places" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.timgeldof.gustfinder.AboutFragment"
+        android:name="com.timgeldof.gustfinder.screens.about.AboutFragment"
         android:label="About" />
 </navigation>
