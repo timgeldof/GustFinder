@@ -9,13 +9,34 @@
         android:background="@color/colorSand">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/text_places"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/showButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/showButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show places"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addPlaceButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_places" />
+
+        <Button
+            android:id="@+id/addPlaceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Place"
+            app:layout_constraintBottom_toBottomOf="@+id/showButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toEndOf="@+id/showButton"
+            app:layout_constraintTop_toTopOf="@+id/showButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
