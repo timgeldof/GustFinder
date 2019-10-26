@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">GustFinder</string>
-    <string name="GustFinder" >GustFinder</string>
+    <string name="GustFinder">GustFinder</string>
     <string name="app_title">GustFinder</string>
     <string name="my_locations">Mijn plaatsen</string>
     <string name="my_map">Mijn kaart</string>
     <string name="other_resources">Interessante bronnen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="descr_wind_icon">Een afbeelding van wind</string>
 </resources>
