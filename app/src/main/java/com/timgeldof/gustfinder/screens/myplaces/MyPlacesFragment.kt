@@ -30,9 +30,8 @@ class MyPlacesFragment : Fragment() {
         // viewmodelprovider associates viewmodel with 'this' fragment, when it's called again. It will return the same viewmodel
         Log.i("MyPlacesViewModel","ViewmodelProviders of called")
         viewModel = ViewModelProviders.of(this).get(MyPlacesViewModel::class.java)
-        binding.addPlaceButton.setOnClickListener{
-            viewModel.addPlace()
-        }
+        binding.viewModel = viewModel
+        binding.setLifecycleOwner(this)
         viewModel.myPlaces.observe(this, Observer {
             myPlaces -> binding.textPlaces.text = myPlaces.joinToString()
         })
