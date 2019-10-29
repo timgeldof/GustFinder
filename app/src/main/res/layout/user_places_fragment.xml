@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.timgeldof.gustfinder.screens.myplaces.MyPlacesViewModel" />
+            name="userPlacesViewModel"
+            type="com.timgeldof.gustfinder.screens.userplaces.UserPlacesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,31 +18,36 @@
             android:id="@+id/text_places"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/showButton"
+            android:text="@{userPlacesViewModel.placesString}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/showButton"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show places"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/addPlaceButton"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{() -> userPlacesViewModel.addPlacesToDatabase()}"
+            android:text="Add places"
+            app:layout_constraintBottom_toTopOf="@+id/btn_clear_places"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_places" />
 
         <Button
-            android:id="@+id/addPlaceButton"
+            android:id="@+id/btn_clear_places"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Place"
-            android:onClick="@{()->viewModel.addPlace()}"
-            app:layout_constraintBottom_toBottomOf="@+id/showButton"
+            android:layout_marginTop="8dp"
+            android:text="Clear"
+            android:onClick="@{() -> userPlacesViewModel.removeAllPlacesFromDatabase()}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
-            app:layout_constraintStart_toEndOf="@+id/showButton"
-            app:layout_constraintTop_toTopOf="@+id/showButton" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button2"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

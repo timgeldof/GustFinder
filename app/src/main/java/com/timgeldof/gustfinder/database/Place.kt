@@ -10,7 +10,7 @@ data class Place(
     @PrimaryKey(autoGenerate = true)
     var placeId: Long = 0L,
     @ColumnInfo(name = "city")
-    var city: String,
+    var city: String ,
     @ColumnInfo(name = "country_iso_code")
     var countryCodeISO: String
 )

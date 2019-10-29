@@ -1,10 +1,11 @@
 package com.timgeldof.gustfinder.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities=[Place::class], version = 1,exportSchema = false)
+@Database(entities=[Place::class], version = 1)
 abstract class GustDatabase : RoomDatabase() {
     abstract val placeDatabaseDao: PlaceDatabaseDao
 
@@ -25,9 +26,8 @@ abstract class GustDatabase : RoomDatabase() {
                     INSTANCE = instance
                 }
                 return instance
+                Log.i("Database",instance.toString())
             }
-
-
         }
     }
 }

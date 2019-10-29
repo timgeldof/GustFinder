@@ -1,4 +1,4 @@
-package com.timgeldof.gustfinder.screens.myplaces
+package com.timgeldof.gustfinder.screens.userplaces
 
 
 import android.os.Bundle
@@ -11,26 +11,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.timgeldof.gustfinder.R
+import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.databinding.MyPlacesFragmentBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class MyPlacesFragment : Fragment() {
+class UserPlacesFragment : Fragment() {
 
 
     private lateinit var binding: MyPlacesFragmentBinding
-    private lateinit var viewModel : MyPlacesViewModel
+    private lateinit var viewModel : UserPlacesViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<MyPlacesFragmentBinding>(inflater,
-            R.layout.my_places_fragment, container, false)
+            R.layout.user_places_fragment, container, false)
+
+        val application = requireNotNull(this.activity).application
+
+
+        val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
+        val viewModelFactory = UserPlacesViewModelFactory(dataSource, application )
 
 
         // viewmodelprovider associates viewmodel with 'this' fragment, when it's called again. It will return the same viewmodel
-        Log.i("MyPlacesViewModel","ViewmodelProviders of called")
-        viewModel = ViewModelProviders.of(this).get(MyPlacesViewModel::class.java)
-        binding.viewModel = viewModel
+        Log.i("UserPlacesViewModel","ViewmodelProviders of called")
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
+        binding.myPlacesViewModel = viewModel
         binding.setLifecycleOwner(this)
         viewModel.myPlaces.observe(this, Observer {
             myPlaces -> binding.textPlaces.text = myPlaces.joinToString()
