@@ -38,7 +38,6 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
 
 
     fun addPlacesToDatabase(){
-        Log.i("Database", myPlaces.value?.joinToString())
         uiScope.launch {
             insert(place1)
         }

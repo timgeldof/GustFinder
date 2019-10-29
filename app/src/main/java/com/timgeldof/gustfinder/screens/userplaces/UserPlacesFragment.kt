@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
-import com.timgeldof.gustfinder.databinding.MyPlacesFragmentBinding
+import com.timgeldof.gustfinder.databinding.UserPlacesFragmentBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -20,15 +20,14 @@ import com.timgeldof.gustfinder.databinding.MyPlacesFragmentBinding
 class UserPlacesFragment : Fragment() {
 
 
-    private lateinit var binding: MyPlacesFragmentBinding
+    private lateinit var binding: UserPlacesFragmentBinding
     private lateinit var viewModel : UserPlacesViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<MyPlacesFragmentBinding>(inflater,
+        binding = DataBindingUtil.inflate<UserPlacesFragmentBinding>(inflater,
             R.layout.user_places_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
-
 
         val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
         val viewModelFactory = UserPlacesViewModelFactory(dataSource, application )
@@ -37,11 +36,8 @@ class UserPlacesFragment : Fragment() {
         // viewmodelprovider associates viewmodel with 'this' fragment, when it's called again. It will return the same viewmodel
         Log.i("UserPlacesViewModel","ViewmodelProviders of called")
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
-        binding.myPlacesViewModel = viewModel
+        binding.userPlacesViewModel = viewModel
         binding.setLifecycleOwner(this)
-        viewModel.myPlaces.observe(this, Observer {
-            myPlaces -> binding.textPlaces.text = myPlaces.joinToString()
-        })
 
         return binding.root
     }
