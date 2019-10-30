@@ -33,10 +33,19 @@ class UserPlacesFragment : Fragment() {
         val viewModelFactory = UserPlacesViewModelFactory(dataSource, application )
 
 
-        // viewmodelprovider associates viewmodel with 'this' fragment, when it's called again. It will return the same viewmodel
-        Log.i("UserPlacesViewModel","ViewmodelProviders of called")
+
+
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
         binding.userPlacesViewModel = viewModel
+        val adapter = UserPlacesAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.myPlaces.observe(this,
+            Observer {
+                    places ->
+                        adapter.data = places
+            }
+
+        )
         binding.setLifecycleOwner(this)
 
         return binding.root

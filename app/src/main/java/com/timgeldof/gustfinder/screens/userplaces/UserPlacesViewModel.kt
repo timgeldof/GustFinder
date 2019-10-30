@@ -54,6 +54,7 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
             database.insert(place)
         }
     }
+
     private suspend fun clear(){
         withContext(Dispatchers.IO){
             database.clear()
