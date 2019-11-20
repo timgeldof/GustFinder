@@ -13,7 +13,7 @@ interface PlaceDatabaseDao {
     fun get(key: Long): Place?
     @Insert
     fun insert(place: Place)
-    @Query("SELECT * FROM places_table ORDER BY city DESC")
+    @Query("SELECT * FROM places_table ORDER BY area DESC")
     fun getAllPlaces(): LiveData<List<Place>>
     @Query("DELETE FROM places_table WHERE placeId = :key")
     fun removePlace(key: Long)

@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.databinding.UserPlacesFragmentBinding
@@ -32,22 +35,19 @@ class UserPlacesFragment : Fragment() {
         val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
         val viewModelFactory = UserPlacesViewModelFactory(dataSource, application )
 
-
-
-
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
         binding.userPlacesViewModel = viewModel
         val adapter = UserPlacesAdapter()
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         viewModel.myPlaces.observe(this,
             Observer {
                     places ->
                         adapter.data = places
             }
-
         )
         binding.setLifecycleOwner(this)
-
+        binding.addPlaceButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_myPlacesFragment_to_addPlaceFragment))
         return binding.root
     }
 

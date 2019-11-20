@@ -15,7 +15,7 @@ import java.lang.StringBuilder
 
 class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Application): AndroidViewModel(application) {
 
-    private var _myPlaces = database.getAllPlaces()
+    private var _myPlaces : LiveData<List<Place>>
     private var viewModelJob = Job()
     private val uiScope  = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -23,9 +23,11 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
 
     val myPlaces: LiveData<List<Place>>
             get() = _myPlaces
+    private val place1 = Place(area = "Wenduine", region = "West-Vlaanderen",country = "BEL",longitude = "51.300", latitude = "3.083")
 
     init{
         Log.i("UserPlacesViewModel", "Init called")
+        _myPlaces = database.getAllPlaces()
     }
 
     override fun onCleared() {
@@ -34,12 +36,10 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
         Log.i("UserPlacesViewModel","OnCleared called")
     }
 
-    private val place1 = Place(city = "Wenduine", countryCodeISO = "BEL")
 
-
-    fun addPlacesToDatabase(){
+    fun getPlacesFromDB(){
         uiScope.launch {
-            insert(place1)
+            _myPlaces = database.getAllPlaces()
         }
     }
 
@@ -68,9 +68,9 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
         val stringBuilder = StringBuilder()
         stringBuilder.apply {
             places.forEach { place ->
-                append(place.city)
+                append(place.area)
                 append("<br>")
-                append(place.countryCodeISO)
+                append(place.country)
                 append("<br>")
             }
         }

@@ -20,9 +20,21 @@
     <fragment
         android:id="@+id/myPlacesFragment"
         android:name="com.timgeldof.gustfinder.screens.userplaces.UserPlacesFragment"
-        android:label="My places" />
+        android:label="My places" >
+        <action
+            android:id="@+id/action_myPlacesFragment_to_addPlaceFragment"
+            app:destination="@id/addPlaceFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.timgeldof.gustfinder.screens.about.AboutFragment"
         android:label="About" />
+    <fragment
+        android:id="@+id/addPlaceFragment"
+        android:name="com.timgeldof.gustfinder.screens.add_place.AddPlaceFragment"
+        android:label="Add a place" />
 </navigation>
