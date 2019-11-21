@@ -33,6 +33,9 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao, application: Application
     val response: LiveData<ApiSearchResponse>
         get() = _response
 
+
+
+
     fun getSearchResults(query : String){
         if(query.length>3){
             uiScope.launch {

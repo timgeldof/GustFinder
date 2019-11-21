@@ -20,11 +20,16 @@ import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.databinding.AddPlaceFragmentBinding
 import com.timgeldof.gustfinder.databinding.UserPlacesFragmentBinding
+import kotlinx.coroutines.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class AddPlaceFragment : Fragment() {
+
+    private var viewModelJob = Job()
+    private val uiScope  = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private lateinit var binding: AddPlaceFragmentBinding
     private lateinit var viewModel : AddPlaceViewModel
@@ -45,13 +50,24 @@ class AddPlaceFragment : Fragment() {
         val adapter = AddPlaceAdapter()
         binding.searchResultRecyclerview.adapter = adapter
         binding.addPlaceTextField.addTextChangedListener(object : TextWatcher {
+            var searchFor: String = ""
             override fun afterTextChanged(editable: Editable?) {
-                var current = editable.toString()
-                viewModel.getSearchResults(current)
+                var searchText = editable.toString()
+                if (searchText == searchFor)
+                    return
+                searchFor = searchText
+                uiScope.launch {
+                    delay(600)  //debounce timeOut
+                    if (searchText != searchFor)
+                        return@launch
+                    viewModel.getSearchResults(searchFor)
+                }
             }
             override fun beforeTextChanged(c: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(c: CharSequence?, start: Int, count: Int, after: Int) {}
         })
+
+
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
             it?.let{
