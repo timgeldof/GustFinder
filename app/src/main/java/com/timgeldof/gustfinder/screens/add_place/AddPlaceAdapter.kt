@@ -8,7 +8,6 @@ import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.PlaceItemBinding
 import com.timgeldof.gustfinder.network.models.Result
-import com.timgeldof.gustfinder.screens.userplaces.UserPlacesAdapter
 
 class AddPlaceAdapter : RecyclerView.Adapter<AddPlaceAdapter.PlaceViewHolder>() {
 

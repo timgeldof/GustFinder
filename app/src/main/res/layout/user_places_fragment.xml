@@ -6,7 +6,7 @@
     <data>
         <variable
             name="userPlacesViewModel"
-            type="com.timgeldof.gustfinder.screens.userplaces.UserPlacesViewModel" />
+            type="com.timgeldof.gustfinder.screens.user_places.UserPlacesViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"

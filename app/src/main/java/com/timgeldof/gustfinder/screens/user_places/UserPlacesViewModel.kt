@@ -1,4 +1,4 @@
-package com.timgeldof.gustfinder.screens.userplaces
+package com.timgeldof.gustfinder.screens.user_places
 
 import android.app.Application
 import android.content.res.Resources

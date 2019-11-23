@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPlacesFragment"
-        android:name="com.timgeldof.gustfinder.screens.userplaces.UserPlacesFragment"
+        android:name="com.timgeldof.gustfinder.screens.user_places.UserPlacesFragment"
         android:label="My places" >
         <action
             android:id="@+id/action_myPlacesFragment_to_addPlaceFragment"
