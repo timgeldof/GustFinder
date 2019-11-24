@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.timgeldof.gustfinder.R
@@ -36,13 +37,25 @@ class UserPlacesFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
         binding.userPlacesViewModel = viewModel
-        val adapter = UserPlacesAdapter()
+        val adapter = UserPlacesAdapter(UserPlacesAdapter.OnClickListener{
+            viewModel.displayPlaceDetails(it)
+        })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         viewModel.myPlaces.observe(this,
             Observer {
                     places ->
                         adapter.data = places
+            }
+        )
+        viewModel.navigateToSelectedPlace.observe(this,
+            Observer{
+                place ->
+                    if(place!= null){
+                        findNavController()
+                            .navigate(UserPlacesFragmentDirections.actionMyPlacesFragmentToPlaceDetailFragment(place))
+                        viewModel.displayPlaceDetailsComplete()
+                    }
             }
         )
         binding.setLifecycleOwner(this)

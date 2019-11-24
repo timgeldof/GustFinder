@@ -11,10 +11,7 @@ import com.timgeldof.gustfinder.network.models.ApiSearchResponse
 import com.timgeldof.gustfinder.network.models.Result
 import com.timgeldof.gustfinder.network.service.GustFinderLocationApi
 import com.timgeldof.gustfinder.network.service.GustFinderLocationApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 enum class ApiStatus{LOADING, ERROR,DONE}
 
@@ -33,8 +30,9 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao, application: Application
     val response: LiveData<ApiSearchResponse>
         get() = _response
 
-
-
+    init {
+        _status.value = ApiStatus.ERROR
+    }
 
     fun getSearchResults(query : String){
         if(query.length>3){
@@ -46,9 +44,13 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao, application: Application
                     _status.value = ApiStatus.DONE
                 } catch (t: Throwable){
                     _status.value = ApiStatus.ERROR
-                    Log.i("API", t.message)
                 }
             }
+        }
+    }
+    suspend fun insertPlaceIntoDatabase(place: Place){
+        withContext(Dispatchers.IO) {
+            database.insert(place)
         }
     }
 

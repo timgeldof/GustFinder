@@ -28,6 +28,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_myPlacesFragment_to_placeDetailFragment"
+            app:destination="@id/placeDetailFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -36,5 +43,19 @@
     <fragment
         android:id="@+id/addPlaceFragment"
         android:name="com.timgeldof.gustfinder.screens.add_place.AddPlaceFragment"
-        android:label="Add a place" />
+        android:label="Add a place" >
+        <action
+            android:id="@+id/action_addPlaceFragment_to_myPlacesFragment"
+            app:destination="@id/myPlacesFragment"
+            app:popUpTo="@+id/myPlacesFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeDetailFragment"
+        android:name="com.timgeldof.gustfinder.screens.place_detail.PlaceDetailFragment"
+        android:label="PlaceDetailFragment" >
+        <argument
+            android:name="selectedPlace"
+            app:argType="com.timgeldof.gustfinder.database.Place" />
+    </fragment>
 </navigation>

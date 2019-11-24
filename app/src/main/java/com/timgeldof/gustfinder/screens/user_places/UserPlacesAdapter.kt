@@ -8,7 +8,7 @@ import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.PlaceItemBinding
 
-class UserPlacesAdapter: RecyclerView.Adapter<UserPlacesAdapter.PlaceViewHolder>() {
+class UserPlacesAdapter(private val onClickListener: OnClickListener): RecyclerView.Adapter<UserPlacesAdapter.PlaceViewHolder>() {
 
     var data = listOf<Place>()
         set(value) {
@@ -26,6 +26,9 @@ class UserPlacesAdapter: RecyclerView.Adapter<UserPlacesAdapter.PlaceViewHolder>
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         holder.binding.place = data[position]
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(data[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +38,10 @@ class UserPlacesAdapter: RecyclerView.Adapter<UserPlacesAdapter.PlaceViewHolder>
     class PlaceViewHolder(val binding: PlaceItemBinding): RecyclerView.ViewHolder(binding.root){
         val cityName: TextView = binding.txtCityName
         val country: TextView = binding.txtCountry
+    }
+
+    class OnClickListener(val clickListener: (place: Place) -> Unit){
+        fun onClick(place:Place) = clickListener(place)
     }
 
 }

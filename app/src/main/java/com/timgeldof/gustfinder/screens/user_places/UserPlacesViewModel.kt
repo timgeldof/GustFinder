@@ -15,15 +15,16 @@ import java.lang.StringBuilder
 
 class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Application): AndroidViewModel(application) {
 
-    private var _myPlaces : LiveData<List<Place>>
     private var viewModelJob = Job()
     private val uiScope  = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val _navigateToSelectedPlace = MutableLiveData<Place>()
+    val navigateToSelectedPlace: LiveData<Place>
+        get() = _navigateToSelectedPlace
 
-
+    private var _myPlaces : LiveData<List<Place>>
     val myPlaces: LiveData<List<Place>>
             get() = _myPlaces
-    private val place1 = Place(area = "Wenduine", region = "West-Vlaanderen",country = "BEL",longitude = "51.300", latitude = "3.083")
 
     init{
         Log.i("UserPlacesViewModel", "Init called")
@@ -35,19 +36,13 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
         viewModelJob.cancel()
         Log.i("UserPlacesViewModel","OnCleared called")
     }
-
-
-    fun getPlacesFromDB(){
-        uiScope.launch {
-            _myPlaces = database.getAllPlaces()
-        }
+    fun displayPlaceDetails(place: Place) {
+        _navigateToSelectedPlace.value = place
+    }
+    fun displayPlaceDetailsComplete() {
+        _navigateToSelectedPlace.value = null
     }
 
-    fun removeAllPlacesFromDatabase(){
-        uiScope.launch {
-            clear()
-        }
-    }
 
     private suspend fun insert(place: Place){
         withContext(Dispatchers.IO){
@@ -78,5 +73,17 @@ class UserPlacesViewModel(val database:PlaceDatabaseDao, application: Applicatio
             return Html.fromHtml(stringBuilder.toString(), Html.FROM_HTML_MODE_LEGACY)
         else
             return HtmlCompat.fromHtml(stringBuilder.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+
+    fun getPlacesFromDB(){
+        uiScope.launch {
+            _myPlaces = database.getAllPlaces()
+        }
+    }
+
+    fun removeAllPlacesFromDatabase(){
+        uiScope.launch {
+            clear()
+        }
     }
 }

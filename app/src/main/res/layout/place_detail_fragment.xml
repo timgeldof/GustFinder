@@ -7,18 +7,26 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:text="Dit is een detailscherm van:"
+            />
         <TextView
             android:id="@+id/txt_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@{placeDetailViewModel.place.area}" />
 
         <TextView
             android:id="@+id/txt_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@{placeDetailViewModel.place.country}" />
     </LinearLayout>
 
 

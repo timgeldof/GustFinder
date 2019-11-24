@@ -10,7 +10,7 @@ import androidx.room.Update
 interface PlaceDatabaseDao {
 
     @Query("SELECT * from places_table WHERE placeId = :key")
-    fun get(key: Long): Place?
+    fun get(key: Long): LiveData<Place>
     @Insert
     fun insert(place: Place)
     @Query("SELECT * FROM places_table ORDER BY area DESC")

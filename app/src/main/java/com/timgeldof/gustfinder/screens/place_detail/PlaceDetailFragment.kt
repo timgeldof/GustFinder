@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.PlaceDetailFragmentBinding
 
 /**
@@ -23,11 +24,12 @@ class PlaceDetailFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
 
-        val viewModelFactory = PlaceDetailViewModelFactory(0,dataSource)
+        val place = PlaceDetailFragmentArgs.fromBundle(arguments!!).selectedPlace
+        val viewModelFactory = PlaceDetailViewModelFactory(place)
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlaceDetailViewModel::class.java)
 
         binding.placeDetailViewModel = viewModel
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
 
 

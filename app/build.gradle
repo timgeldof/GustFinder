@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -25,6 +28,9 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    androidExtensions{
+        experimental = true
     }
 }
 
@@ -48,6 +54,7 @@ dependencies {
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
+
     //api
     implementation "com.squareup.retrofit2:retrofit: 2.6.2"
     implementation "com.squareup.retrofit2:converter-moshi:2.6.2"
