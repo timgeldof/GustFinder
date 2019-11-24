@@ -1,7 +1,6 @@
 package com.timgeldof.gustfinder.network.models.marine_weather_api
 
+data class ApiWeatherResponse (
 
-data class WeatherIconUrl (
-
-	val value : String
+	val data : Data
 )
