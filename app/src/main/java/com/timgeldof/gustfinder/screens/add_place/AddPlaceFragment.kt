@@ -58,6 +58,11 @@ class AddPlaceFragment : Fragment() {
         })
 
         binding.searchResultRecyclerview.adapter = adapter
+
+
+        /*
+        ** SOURCE: https://medium.com/@pro100svitlo/edittext-debounce-with-kotlin-coroutines-fd134d54f4e9
+        */
         binding.addPlaceTextField.addTextChangedListener(object : TextWatcher {
             var searchFor: String = ""
             override fun afterTextChanged(editable: Editable?) {

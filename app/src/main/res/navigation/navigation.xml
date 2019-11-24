@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/placeDetailFragment"
         android:name="com.timgeldof.gustfinder.screens.place_detail.PlaceDetailFragment"
-        android:label="PlaceDetailFragment" >
+        android:label="Forecast">
         <argument
             android:name="selectedPlace"
             app:argType="com.timgeldof.gustfinder.database.Place" />

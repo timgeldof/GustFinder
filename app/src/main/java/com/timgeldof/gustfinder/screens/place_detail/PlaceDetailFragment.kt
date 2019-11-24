@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
@@ -20,9 +21,7 @@ class PlaceDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<PlaceDetailFragmentBinding>(inflater, R.layout.place_detail_fragment, container, false)
-
-        val application = requireNotNull(this.activity).application
-        val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
+        binding.lifecycleOwner = this
 
         val place = PlaceDetailFragmentArgs.fromBundle(arguments!!).selectedPlace
         val viewModelFactory = PlaceDetailViewModelFactory(place)
@@ -31,7 +30,11 @@ class PlaceDetailFragment : Fragment() {
         binding.placeDetailViewModel = viewModel
         binding.lifecycleOwner = this
 
-
+        val adapter = PlaceDetailAdapter()
+        binding.forecastRecyclerView.adapter = adapter
+        viewModel.weather.observe(this, Observer {
+            adapter.data = it
+        })
 
         return binding.root;
 
