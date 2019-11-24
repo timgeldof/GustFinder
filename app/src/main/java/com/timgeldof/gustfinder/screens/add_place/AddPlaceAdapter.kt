@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.AddPlaceItemBinding
-import com.timgeldof.gustfinder.databinding.PlaceItemBinding
-import com.timgeldof.gustfinder.network.models.Result
+import com.timgeldof.gustfinder.network.models.search_api.Result
 
 class AddPlaceAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<AddPlaceAdapter.PlaceViewHolder>() {
 

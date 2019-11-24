@@ -1,16 +1,16 @@
-package com.timgeldof.gustfinder.network.models
+package com.timgeldof.gustfinder.network.models.search_api
 
 
 
 data class Result (
 
-	val areaName : List<AreaName>,
-	val country : List<Country>,
-	val region : List<Region>,
-	val latitude : String,
-	val longitude : String,
-	val population : Int,
-	val weatherUrl : List<WeatherUrl>
+    val areaName : List<AreaName>,
+    val country : List<Country>,
+    val region : List<Region>,
+    val latitude : String,
+    val longitude : String,
+    val population : Int,
+    val weatherUrl : List<WeatherUrl>
 ){
 	fun getArea() : String{
 		return areaName[0].value
