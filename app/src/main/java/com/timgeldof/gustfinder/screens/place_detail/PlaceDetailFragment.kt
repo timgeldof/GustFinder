@@ -10,9 +10,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.timgeldof.gustfinder.R
-import com.timgeldof.gustfinder.database.GustDatabase
-import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.PlaceDetailFragmentBinding
 
 /**
@@ -30,16 +29,19 @@ class PlaceDetailFragment : Fragment() {
 
         binding.placeDetailViewModel = viewModel
         binding.lifecycleOwner = this
+        val snapHelper = LinearSnapHelper()
 
         val adapter = PlaceDetailAdapter()
         binding.forecastRecyclerView.adapter = adapter
+        snapHelper.attachToRecyclerView(binding.forecastRecyclerView)
+
         viewModel.weather.observe(this, Observer {
             adapter.data = it
         })
 
-        Toast.makeText(context, "Swipe right for more", Toast.LENGTH_SHORT)
-        return binding.root;
+        Toast.makeText(context, "Swipe right for more", Toast.LENGTH_SHORT).show()
 
+        return binding.root;
 
     }
 

@@ -1,13 +1,19 @@
 package com.timgeldof.gustfinder
 
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.timgeldof.gustfinder.screens.add_place.ApiStatus
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.*
 
-
-        @BindingAdapter("apiStatus")
+@BindingAdapter("apiStatus")
         fun ImageView.setStatus(status: ApiStatus?) {
             when (status) {
                 ApiStatus.LOADING -> {
@@ -23,4 +29,17 @@ import com.timgeldof.gustfinder.screens.add_place.ApiStatus
                 }
             }
         }
-
+@BindingAdapter("glideSrc")
+fun ImageView.setResource(url: String) {
+    Glide.with(this.context).load(url).into(this)
+}
+@BindingAdapter("dateFormatted")
+fun TextView.SetDateFormatted(text: String){
+    var parsedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val date : LocalDate = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyy-MM-dd"))
+        val formattedDate : String = date.dayOfWeek.name.toLowerCase() + " " + date.dayOfMonth.toString() + " " + date.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH).toLowerCase()
+        this.setText(formattedDate)
+    } else {
+        this.setText(text)
+    }
+}

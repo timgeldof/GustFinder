@@ -26,7 +26,11 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="0dp"
             android:fontFamily="@font/quicksand"
-            android:text="@{weather.date}" />
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:dateFormatted="@{weather.date}"
+            tools:text="maandag 5 oktober" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -43,174 +47,212 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:id="@+id/img_morning_forecast"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_margin="10dp"
+                                app:glideSrc="@{weather.hourly[2].getWeatherIconUrl()}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/wind_icon" />
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/img_morning_forecast"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/textView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="24dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/quicksand"
+                                    android:text="@string/time_morning"
+                                    android:textAlignment="center"
+                                    android:textSize="24sp" />
+
+                                <TextView
+                                    android:id="@+id/txt_morning_forecast"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/quicksand"
+                                    android:text="@{weather.hourly[2].getSurfStatistics()}"
+                                    android:textAlignment="center"
+                                    tools:text="@android:string/httpErrorUnsupportedScheme" />
+                            </LinearLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@color/colorLightBlue">
-
-                        <TextView
-                            android:id="@+id/textView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@string/time_morning"
-                            app:layout_constraintBottom_toTopOf="@+id/img_morning_forecast"
-                            app:layout_constraintEnd_toEndOf="@+id/img_morning_forecast"
-                            app:layout_constraintStart_toStartOf="@+id/txt_morning_forecast"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/txt_morning_forecast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@{weather.hourly[2].getSurfStatistics()}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/img_morning_forecast"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-                        <ImageView
-                            android:id="@+id/img_morning_forecast"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginEnd="24dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/txt_morning_forecast"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/txt_morning_forecast"
-                            app:layout_constraintTop_toTopOf="@+id/txt_morning_forecast"
-                            app:srcCompat="@drawable/wind_icon" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@color/colorSand">
-
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@string/time_noon"
-                            app:layout_constraintBottom_toTopOf="@+id/img_noon_forecast"
-                            app:layout_constraintEnd_toEndOf="@+id/img_noon_forecast"
-                            app:layout_constraintStart_toStartOf="@+id/txt_noon_forecast"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/txt_noon_forecast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@{weather.hourly[3].getSurfStatistics()}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/img_noon_forecast"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
 
                         <ImageView
                             android:id="@+id/img_noon_forecast"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginEnd="24dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/txt_noon_forecast"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/txt_noon_forecast"
-                            app:layout_constraintTop_toTopOf="@+id/txt_noon_forecast"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            app:glideSrc="@{weather.hourly[3].getWeatherIconUrl()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayoutNoon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/wind_icon" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@color/colorBlue">
-
-                        <TextView
-                            android:id="@+id/TextView69"
+                        <LinearLayout
+                            android:id="@+id/linearLayoutNoon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@string/time_afternoon"
-                            app:layout_constraintBottom_toTopOf="@+id/img_afternoon_forecast"
-                            app:layout_constraintEnd_toEndOf="@+id/img_afternoon_forecast"
-                            app:layout_constraintStart_toStartOf="@+id/txt_afternoon_forecast"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/txt_afternoon_forecast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@{weather.hourly[4].getSurfStatistics()}"
+                            android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/img_afternoon_forecast"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/TextView69" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_noon_forecast"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/txt_noon_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@string/time_noon"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/txt_noon_forecast"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@{weather.hourly[3].getSurfStatistics()}"
+                                android:textAlignment="center"
+                                tools:text="@android:string/httpErrorUnsupportedScheme" />
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
 
                         <ImageView
                             android:id="@+id/img_afternoon_forecast"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginEnd="24dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/txt_afternoon_forecast"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/txt_afternoon_forecast"
-                            app:layout_constraintTop_toTopOf="@+id/txt_afternoon_forecast"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            app:glideSrc="@{weather.hourly[4].getWeatherIconUrl()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayoutAfternoon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/wind_icon" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@color/colorDarkBlue">
-
-                        <TextView
-                            android:id="@+id/textView7"
+                        <LinearLayout
+                            android:id="@+id/linearLayoutAfternoon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@string/time_evening"
-                            app:layout_constraintBottom_toTopOf="@+id/img_evening_forecast"
-                            app:layout_constraintEnd_toEndOf="@+id/img_evening_forecast"
-                            app:layout_constraintStart_toStartOf="@+id/txt_evening_forecast"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/txt_evening_forecast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:fontFamily="@font/quicksand"
-                            android:text="@{weather.hourly[5].getSurfStatistics()}"
+                            android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/img_evening_forecast"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_afternoon_forecast"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/txt_afternoon_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@string/time_afternoon"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/txt_afternoon_forecast"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@{weather.hourly[4].getSurfStatistics()}"
+                                android:textAlignment="center"
+                                tools:text="@android:string/httpErrorUnsupportedScheme" />
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
 
                         <ImageView
                             android:id="@+id/img_evening_forecast"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginEnd="24dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/txt_evening_forecast"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/txt_evening_forecast"
-                            app:layout_constraintTop_toTopOf="@+id/txt_evening_forecast"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            app:glideSrc="@{weather.hourly[5].getWeatherIconUrl()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayoutEvening"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/wind_icon" />
 
+                        <LinearLayout
+                            android:id="@+id/linearLayoutEvening"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_evening_forecast"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/txt_evening_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@string/time_evening"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/txt_evening_forecast"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@{weather.hourly[5].getSurfStatistics()}"
+                                android:textAlignment="center"
+                                tools:text="@android:string/httpErrorUnsupportedScheme" />
+                        </LinearLayout>
+
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </LinearLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>

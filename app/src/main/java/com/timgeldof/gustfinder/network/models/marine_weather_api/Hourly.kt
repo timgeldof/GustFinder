@@ -52,7 +52,9 @@ data class Hourly (
 		return weatherIconUrl[0].value;
 	}
 	fun getWindGustFormatted(): String{
-		return "${windGustKmph.toString()} km/h"
+		if(windGustKmph!= null)
+			return "${windGustKmph.toString()} km/h"
+		else return "-"
 	}
 	fun getSwellHeightFormatted(): String {
 		return swellHeight_m.toString() + " m"
