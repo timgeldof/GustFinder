@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/homeFragment"
+        android:title="@string/home" />
     <item
         android:id="@+id/aboutFragment"
         android:title="@string/about" />
     <item
         android:id="@+id/myPlacesFragment"
-        android:title="My places" />
+        android:title="@string/my_places" />
+    <item
+        android:id="@+id/userMapFragment"
+        android:title="@string/txt_my_map" />
+    <item
+        android:id="@+id/addPlaceFragment"
+        android:title="@string/add_a_place" />
 </menu>

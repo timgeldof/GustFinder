@@ -17,8 +17,8 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_homeFragment_to_myPlacesMapFragment"
-            app:destination="@id/myPlacesMapFragment" />
+            android:id="@+id/action_homeFragment_to_userMapFragment"
+            app:destination="@id/userMapFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPlacesFragment"
@@ -62,8 +62,7 @@
             app:argType="com.timgeldof.gustfinder.database.Place" />
     </fragment>
     <fragment
-        android:id="@+id/myPlacesMapFragment"
-        android:name="com.timgeldof.gustfinder.MyPlacesMapFragment"
-        android:label="my_places_map_fragment"
-        tools:layout="@layout/my_places_map_fragment" />
+        android:id="@+id/userMapFragment"
+        android:name="com.timgeldof.gustfinder.screens.user_map.UserMapFragment"
+        android:label="My Map" />
 </navigation>

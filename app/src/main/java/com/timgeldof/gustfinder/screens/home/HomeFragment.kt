@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
             R.layout.home_fragment,container, false)
 
         binding.textMyPlaces.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_myPlacesFragment))
-
+        binding.textMyMap.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_userMapFragment))
         setHasOptionsMenu(true)
 
         return binding.root
