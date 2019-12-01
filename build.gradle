@@ -34,12 +34,6 @@ allprojects {
         
     }
 }
-apply plugin: 'org.jetbrains.dokka'
-
-task dokkaMarkdown(type: org.jetbrains.dokka.gradle.DokkaTask) {
-    outputFormat = 'markdown'
-    outputDirectory = "$buildDir/markdown"
-}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

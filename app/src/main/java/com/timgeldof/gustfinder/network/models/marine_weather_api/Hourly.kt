@@ -1,5 +1,9 @@
 package com.timgeldof.gustfinder.network.models.marine_weather_api
-
+/**
+ * Hourly contains the hourly forecast from the weather class
+ *
+ *
+ *  */
 data class Hourly (
 
 	val time : Int?,

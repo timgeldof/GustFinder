@@ -12,7 +12,11 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
-
+/**
+ *  This binding adapter sets the visibility and the image source that corresponds to the return value of the api request
+ *
+ * @param status: the status of the api request
+ */
 @BindingAdapter("apiStatus")
         fun ImageView.setStatus(status: ApiStatus?) {
             when (status) {
