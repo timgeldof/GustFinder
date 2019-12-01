@@ -1,0 +1,16 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:com.timgeldof.gustfinder$SetDateFormatted(android.widget.TextView, kotlin.String)com.timgeldof.gustfinder/android.widget.-text-view/-set-date-formatted.md
+$dokka.location:com.timgeldof.gustfinder$setResource(android.widget.ImageView, kotlin.String)com.timgeldof.gustfinder/android.widget.-image-view/set-resource.md
+$dokka.location:com.timgeldof.gustfinder$setStatus(android.widget.ImageView, com.timgeldof.gustfinder.screens.add_place.ApiStatus)com.timgeldof.gustfinder/android.widget.-image-view/set-status.md
+com.timgeldof.gustfinder
+com.timgeldof.gustfinder.database
+com.timgeldof.gustfinder.network.models.marine_weather_api
+com.timgeldof.gustfinder.network.models.search_api
+com.timgeldof.gustfinder.network.service
+com.timgeldof.gustfinder.screens.about
+com.timgeldof.gustfinder.screens.add_place
+com.timgeldof.gustfinder.screens.home
+com.timgeldof.gustfinder.screens.place_detail
+com.timgeldof.gustfinder.screens.user_map
+com.timgeldof.gustfinder.screens.user_places

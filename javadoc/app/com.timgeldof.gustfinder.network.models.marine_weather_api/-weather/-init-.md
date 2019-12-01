@@ -1,0 +1,5 @@
+[app](../../index.md) / [com.timgeldof.gustfinder.network.models.marine_weather_api](../index.md) / [Weather](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`Weather(date: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, astronomy: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Astronomy`](../-astronomy/index.md)`>?, maxtempC: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, maxtempF: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, mintempC: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, mintempF: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, hourly: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Hourly`](../-hourly/index.md)`>)`
