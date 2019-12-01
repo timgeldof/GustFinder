@@ -6,9 +6,11 @@
             name="placeDetailViewModel"
             type="com.timgeldof.gustfinder.screens.place_detail.PlaceDetailViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorLightBlue"
         android:orientation="vertical">
 
         <TextView
@@ -17,26 +19,27 @@
             android:fontFamily="@font/quicksand"
             android:text="Forecast for:"
             android:textSize="24dp" />
+
         <TextView
             android:id="@+id/txt_place"
-            android:fontFamily="@font/quicksand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
             android:text="@{placeDetailViewModel.place.area}" />
 
         <TextView
             android:id="@+id/txt_country"
-            android:fontFamily="@font/quicksand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
             android:text="@{placeDetailViewModel.place.country}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/forecast_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 
 
