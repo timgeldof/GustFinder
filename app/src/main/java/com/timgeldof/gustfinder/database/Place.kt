@@ -13,7 +13,7 @@ data class Place(
     var area: String,
     @ColumnInfo(name = "country")
     var country: String,
-    @ColumnInfo(name="region")
+    @ColumnInfo(name = "region")
     var region: String,
     @ColumnInfo(name = "longitude")
     var longitude: String,

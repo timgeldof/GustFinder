@@ -81,8 +81,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     kapt 'com.github.bumptech.glide:compiler:4.10.0'
 
-    // more than 64k accessible methods due to many libraries etc
-
     //cardview
     implementation 'androidx.cardview:cardview:1.0.0'
 

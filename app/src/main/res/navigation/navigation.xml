@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPlacesFragment"
-        android:name="com.timgeldof.gustfinder.screens.user_places.UserPlacesFragment"
+        android:name="com.timgeldof.gustfinder.screens.userPlaces.UserPlacesFragment"
         android:label="My places" >
         <action
             android:id="@+id/action_myPlacesFragment_to_addPlaceFragment"
@@ -45,17 +45,17 @@
         android:label="About" />
     <fragment
         android:id="@+id/addPlaceFragment"
-        android:name="com.timgeldof.gustfinder.screens.add_place.AddPlaceFragment"
+        android:name="com.timgeldof.gustfinder.screens.addPlace.AddPlaceFragment"
         android:label="Add a place" >
         <action
             android:id="@+id/action_addPlaceFragment_to_myPlacesFragment"
             app:destination="@id/myPlacesFragment"
             app:popUpTo="@+id/myPlacesFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/placeDetailFragment"
-        android:name="com.timgeldof.gustfinder.screens.place_detail.PlaceDetailFragment"
+        android:name="com.timgeldof.gustfinder.screens.placeDetail.PlaceDetailFragment"
         android:label="Forecast">
         <argument
             android:name="selectedPlace"
@@ -63,6 +63,6 @@
     </fragment>
     <fragment
         android:id="@+id/userMapFragment"
-        android:name="com.timgeldof.gustfinder.screens.user_map.UserMapFragment"
+        android:name="com.timgeldof.gustfinder.screens.userMap.UserMapFragment"
         android:label="My Map" />
 </navigation>

@@ -5,13 +5,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.timgeldof.gustfinder.network.models.search_api.ApiSearchResponse
-import com.timgeldof.gustfinder.network.models.marine_weather_api.ApiWeatherResponse
+import com.timgeldof.gustfinder.network.models.searchApi.ApiSearchResponse
+import com.timgeldof.gustfinder.network.models.marineWeatherApi.ApiWeatherResponse
 
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
-
 
 val BASE_URL: String =
     "http://api.worldweatheronline.com/"
@@ -31,8 +30,6 @@ interface GustFinderApiService {
 
     @GET("premium/v1/marine.ashx?key=4e2cb7498c154ab9a3d155550191811&format=json")
     fun getForecastAsync(@Query("q") query: String): Deferred<ApiWeatherResponse>
-
-
 }
 
 object GustFinderApi {

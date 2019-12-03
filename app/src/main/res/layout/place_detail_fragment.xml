@@ -4,7 +4,7 @@
     <data>
         <variable
             name="placeDetailViewModel"
-            type="com.timgeldof.gustfinder.screens.place_detail.PlaceDetailViewModel" />
+            type="com.timgeldof.gustfinder.screens.placeDetail.PlaceDetailViewModel" />
     </data>
 
     <LinearLayout

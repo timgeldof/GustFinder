@@ -5,18 +5,18 @@ import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities=[Place::class], version = 3, exportSchema = false)
+@Database(entities = [Place::class], version = 3, exportSchema = false)
 abstract class GustDatabase : RoomDatabase() {
     abstract val placeDatabaseDao: PlaceDatabaseDao
 
-    companion object{
-        @Volatile //direct beschikbaar voor andere threads
-        private var INSTANCE: GustDatabase?= null
+    companion object {
+        @Volatile // direct beschikbaar voor andere threads
+        private var INSTANCE: GustDatabase? = null
 
-        fun getInstance(context:Context): GustDatabase{
-            synchronized(this){
+        fun getInstance(context: Context): GustDatabase {
+            synchronized(this) {
                 var instance = INSTANCE
-                if(instance==null){
+                if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         GustDatabase::class.java,

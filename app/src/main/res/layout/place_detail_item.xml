@@ -7,7 +7,7 @@
     <data>
         <variable
             name="weather"
-            type="com.timgeldof.gustfinder.network.models.marine_weather_api.Weather" />
+            type="com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather" />
     </data>
     <LinearLayout
         android:orientation="vertical"
@@ -57,7 +57,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_margin="10dp"
-                                app:glideSrc="@{weather.hourly[2].getWeatherIconUrl()}"
+                                app:glideSrc="@{weather.hourly[3].getWeatherIconUrl()}"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/linearLayout"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/quicksand"
-                                    android:text="@{weather.hourly[2].getSurfStatistics()}"
+                                    android:text="@{weather.hourly[3].getSurfStatistics()}"
                                     android:textAlignment="center"
                                     tools:text="@android:string/httpErrorUnsupportedScheme" />
                             </LinearLayout>
@@ -109,7 +109,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            app:glideSrc="@{weather.hourly[3].getWeatherIconUrl()}"
+                            app:glideSrc="@{weather.hourly[4].getWeatherIconUrl()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/linearLayoutNoon"
                             app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +142,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/quicksand"
-                                android:text="@{weather.hourly[3].getSurfStatistics()}"
+                                android:text="@{weather.hourly[4].getSurfStatistics()}"
                                 android:textAlignment="center"
                                 tools:text="@android:string/httpErrorUnsupportedScheme" />
                         </LinearLayout>
@@ -160,7 +160,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            app:glideSrc="@{weather.hourly[4].getWeatherIconUrl()}"
+                            app:glideSrc="@{weather.hourly[5].getWeatherIconUrl()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/linearLayoutAfternoon"
                             app:layout_constraintStart_toStartOf="parent"
@@ -193,7 +193,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/quicksand"
-                                android:text="@{weather.hourly[4].getSurfStatistics()}"
+                                android:text="@{weather.hourly[5].getSurfStatistics()}"
                                 android:textAlignment="center"
                                 tools:text="@android:string/httpErrorUnsupportedScheme" />
                         </LinearLayout>
@@ -211,7 +211,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            app:glideSrc="@{weather.hourly[5].getWeatherIconUrl()}"
+                            app:glideSrc="@{weather.hourly[6].getWeatherIconUrl()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/linearLayoutEvening"
                             app:layout_constraintStart_toStartOf="parent"
@@ -244,7 +244,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/quicksand"
-                                android:text="@{weather.hourly[5].getSurfStatistics()}"
+                                android:text="@{weather.hourly[6].getSurfStatistics()}"
                                 android:textAlignment="center"
                                 tools:text="@android:string/httpErrorUnsupportedScheme" />
                         </LinearLayout>
