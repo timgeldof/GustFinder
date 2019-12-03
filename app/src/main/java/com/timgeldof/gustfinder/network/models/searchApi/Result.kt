@@ -1,5 +1,7 @@
 package com.timgeldof.gustfinder.network.models.searchApi
-
+/**
+ * The Search API location result for the given query parameters
+ */
 data class Result(
 
     val areaName: List<AreaName>,

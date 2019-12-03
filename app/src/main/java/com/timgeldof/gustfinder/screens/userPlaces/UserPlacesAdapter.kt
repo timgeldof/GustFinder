@@ -20,12 +20,13 @@ class UserPlacesAdapter(private val onClickDetailListener: OnClickListener, priv
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.binding.place = getItem(position)
+        val place = getItem(position)
+        holder.binding.place = place
         holder.binding.txtCityName.setOnClickListener {
-            onClickDetailListener.onClick(getItem(position))
+            onClickDetailListener.onClick(place)
         }
         holder.binding.deleteButton.setOnClickListener {
-            onClickDeleteListener.onClick(getItem(position))
+            onClickDeleteListener.onClick(place)
         }
     }
 
@@ -43,7 +44,7 @@ class UserPlacesAdapter(private val onClickDetailListener: OnClickListener, priv
         }
 
         override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
-            return oldItem.equals(newItem) // overridden equals method in place.kt
+            return oldItem == newItem
         }
     }
 }

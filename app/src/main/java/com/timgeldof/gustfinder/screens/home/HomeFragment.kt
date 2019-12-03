@@ -16,7 +16,7 @@ import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.databinding.HomeFragmentBinding
 
 /**
- * A simple [Fragment] subclass.
+ * First [Fragment] in the navhost fragment which contains a menu for navigation
  */
 class HomeFragment : Fragment() {
 

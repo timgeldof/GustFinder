@@ -54,6 +54,12 @@ class PlaceDetailFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.share_menu, menu)
     }
+
+    /**
+     * Sets the share intent in the action bar
+     *
+     * @param item the selected menu item
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.share_item ->

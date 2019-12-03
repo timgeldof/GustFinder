@@ -11,7 +11,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-
+/**
+ * A [ViewModel] subclass
+ *
+ * @param place the place of which the details need to be shown
+ */
 class PlaceDetailViewModel(val place: Place) : ViewModel() {
 
     private var viewModelJob = Job()
@@ -25,7 +29,9 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
     init {
         getForecasts()
     }
-
+    /**
+     * Sets the weather [LiveData] value to the response of the api
+     */
     fun getForecasts() {
         val latAndLon = place.latitude + "," + place.longitude
         uiScope.launch {
@@ -35,6 +41,10 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
             }
         }
     }
+    /**
+     * Creates a share intent to share the forecasts of the current day
+     * @return the share intent
+     */
     fun shareWeatherIntent(): Intent {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

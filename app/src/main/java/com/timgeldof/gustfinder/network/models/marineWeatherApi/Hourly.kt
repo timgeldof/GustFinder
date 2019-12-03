@@ -1,9 +1,7 @@
 package com.timgeldof.gustfinder.network.models.marineWeatherApi
 /**
- * Hourly contains the hourly forecast from the weather class
- *
- *
- *  */
+ * Contains hourly information used in the [Weather] class
+ */
 data class Hourly(
 
     val time: Int?,
@@ -72,6 +70,11 @@ data class Hourly(
     fun getSwellPeriodFormatted(): String {
         return swellPeriod_secs.toString() + " s"
     }
+    /**
+     * Returns weather statistics relevant to a surfer/user of the app
+     *
+     * @return A formatted string containing the weather statistics for the hour
+     */
     fun getSurfStatistics(): String {
         return "Temperature:  " + getTempFormatted() + "\n" +
                 "Wind speed: " + getWindSpeedFormatted() + "\n" +

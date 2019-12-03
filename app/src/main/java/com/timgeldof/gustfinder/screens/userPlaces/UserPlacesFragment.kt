@@ -32,6 +32,7 @@ class UserPlacesFragment : Fragment() {
 
         val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
         val viewModelFactory = UserPlacesViewModelFactory(dataSource, application)
+        binding.setLifecycleOwner(this)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
         binding.userPlacesViewModel = viewModel
@@ -41,17 +42,19 @@ class UserPlacesFragment : Fragment() {
             },
             UserPlacesAdapter.OnClickListener {
                 viewModel.removePlaceFromDatabase(it)
+                viewModel.getPlacesFromDB()
             }
         )
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        viewModel.myPlaces.observe(this,
+        viewModel.myPlaces.observe(viewLifecycleOwner,
             Observer {
                     places ->
                         adapter.submitList(places)
             }
         )
-        viewModel.navigateToSelectedPlace.observe(this,
+
+        viewModel.navigateToSelectedPlace.observe(viewLifecycleOwner,
             Observer {
                 place ->
                     if (place != null) {
@@ -61,7 +64,6 @@ class UserPlacesFragment : Fragment() {
                     }
             }
         )
-        binding.setLifecycleOwner(this)
         binding.addPlaceButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_myPlacesFragment_to_addPlaceFragment))
         return binding.root
     }

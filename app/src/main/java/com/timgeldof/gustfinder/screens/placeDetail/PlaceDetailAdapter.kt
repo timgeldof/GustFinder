@@ -20,10 +20,18 @@ class PlaceDetailAdapter : ListAdapter<Weather, PlaceDetailAdapter.PlaceDetailVi
         holder.bind(getItem(position))
     }
     class PlaceDetailViewHolder(val binding: PlaceDetailItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        /**
+         * Binds the [Weather] parameter to the [PlaceDetailItemBinding]
+         *
+         * @param weather returned by the marine weather api
+         */
         fun bind(weather: Weather) {
             binding.weather = weather
         }
     }
+    /**
+     * Callback class used to calculate the difference between two [Weather] lists for optimizing the recyclerview efficiency.
+     */
     class WeatherDiffCallback : DiffUtil.ItemCallback<Weather>() {
         override fun areItemsTheSame(oldItem: Weather, newItem: Weather): Boolean {
             return oldItem.date == newItem.date

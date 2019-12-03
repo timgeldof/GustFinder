@@ -1,5 +1,8 @@
 package com.timgeldof.gustfinder.network.models.marineWeatherApi
 
+/**
+ * Contains information about the conditions of the moon and the rising and setting of the sun
+ */
 data class Astronomy(
 
     val sunrise: String,

@@ -23,8 +23,4 @@ data class Place(
     @PrimaryKey(autoGenerate = true)
     var placeId: Long = 0L
 
-    override fun equals(other: Any?): Boolean {
-        val otherPlace = other as Place
-        return (this.latitude == otherPlace.latitude) && (this.longitude == otherPlace.longitude)
-    }
 }

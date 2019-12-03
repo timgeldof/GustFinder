@@ -10,7 +10,7 @@ import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.databinding.AboutFragmentBinding
 
 /**
- * A simple [Fragment] subclass.
+ * A subclass of [Fragment] that inflates an view which shows you information about the app.
  */
 class AboutFragment : Fragment() {
 

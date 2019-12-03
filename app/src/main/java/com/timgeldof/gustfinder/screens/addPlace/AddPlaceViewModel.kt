@@ -1,10 +1,10 @@
 package com.timgeldof.gustfinder.screens.addPlace
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.database.PlaceDatabaseDao
 import com.timgeldof.gustfinder.network.models.searchApi.ApiSearchResponse
@@ -16,8 +16,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 enum class ApiStatus { LOADING, ERROR, DONE }
-
-class AddPlaceViewModel(val database: PlaceDatabaseDao, application: Application) : AndroidViewModel(application) {
+/**
+ * Subclass of the [AndroidViewModel]
+ *
+ * @param database [PlaceDatabaseDao] to be used in this class to insert the new Place
+ * @param application
+ * @sample com.mycompany.SomethingTest.simple
+ */
+class AddPlaceViewModel(val database: PlaceDatabaseDao) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -35,7 +41,11 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao, application: Application
     init {
         _status.value = ApiStatus.ERROR
     }
-
+    /**
+     * Sets the value of the _response [LiveData] to the api response by using debounce implemented with coroutines
+     *
+     * @param query the search query parameter for the Search API
+     */
     fun getSearchResults(query: String) {
         if (query.length>3) {
             uiScope.launch {
@@ -50,6 +60,11 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao, application: Application
             }
         }
     }
+    /**
+     * Inserts place into the places_table in a coroutine within the IO context
+     *
+     * @param place the place that needs to be inserted into the database
+     */
     suspend fun insertPlaceIntoDatabase(place: Place) {
         withContext(Dispatchers.IO) {
             database.insert(place)

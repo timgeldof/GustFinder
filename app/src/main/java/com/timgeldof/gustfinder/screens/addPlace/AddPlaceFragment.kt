@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 
 /**
- * A simple [Fragment] subclass.
+ * Subclass of the [Fragment] class
  */
 class AddPlaceFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class AddPlaceFragment : Fragment() {
         val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
         binding.setLifecycleOwner(this)
 
-        val viewModelFactory = AddPlaceViewModelFactory(dataSource, application)
+        val viewModelFactory = AddPlaceViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddPlaceViewModel::class.java)
         binding.viewModel = viewModel
         binding.searchResultRecyclerview.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -57,6 +57,17 @@ class AddPlaceFragment : Fragment() {
         /*
         ** SOURCE: https://medium.com/@pro100svitlo/edittext-debounce-with-kotlin-coroutines-fd134d54f4e9
         */
+        addDebounceTextChangeListener()
+
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it.search_api!!.result)
+            }
+        })
+        return binding.root
+    }
+
+    private fun addDebounceTextChangeListener() {
         binding.addPlaceTextField.addTextChangedListener(object : TextWatcher {
             var searchFor: String = ""
             override fun afterTextChanged(editable: Editable?) {
@@ -74,12 +85,5 @@ class AddPlaceFragment : Fragment() {
             override fun beforeTextChanged(c: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(c: CharSequence?, start: Int, count: Int, after: Int) {}
         })
-
-        viewModel.response.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it.search_api!!.result)
-            }
-        })
-        return binding.root
     }
 }
