@@ -83,7 +83,7 @@ class AddPlaceFragment : Fragment() {
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
             it?.let{
-                adapter.data = it.search_api!!.result
+                adapter.submitList(it.search_api!!.result)
             }
         })
         return binding.root

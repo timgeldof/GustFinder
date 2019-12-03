@@ -36,10 +36,10 @@ class PlaceDetailFragment : Fragment() {
         snapHelper.attachToRecyclerView(binding.forecastRecyclerView)
 
         viewModel.weather.observe(this, Observer {
-            adapter.data = it
+            adapter.submitList(it)
         })
 
-        Toast.makeText(context, "Swipe right for more", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Swipe right for more", Toast.LENGTH_LONG).show()
 
         return binding.root;
 

@@ -3,18 +3,15 @@ package com.timgeldof.gustfinder.screens.user_places
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.PlaceItemBinding
 
-class UserPlacesAdapter(private val onClickListener: OnClickListener): RecyclerView.Adapter<UserPlacesAdapter.PlaceViewHolder>() {
+class UserPlacesAdapter(private val onClickListener: OnClickListener): ListAdapter<Place, UserPlacesAdapter.PlaceViewHolder>(PlacesCallBack()) {
 
-    var data = listOf<Place>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -25,14 +22,10 @@ class UserPlacesAdapter(private val onClickListener: OnClickListener): RecyclerV
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.binding.place = data[position]
+        holder.binding.place = getItem(position)
         holder.itemView.setOnClickListener{
-            onClickListener.onClick(data[position])
+            onClickListener.onClick(getItem(position))
         }
-    }
-
-    override fun getItemCount(): Int {
-        return data.size
     }
 
     class PlaceViewHolder(val binding: PlaceItemBinding): RecyclerView.ViewHolder(binding.root){
@@ -42,6 +35,15 @@ class UserPlacesAdapter(private val onClickListener: OnClickListener): RecyclerV
 
     class OnClickListener(val clickListener: (place: Place) -> Unit){
         fun onClick(place:Place) = clickListener(place)
+    }
+    class PlacesCallBack() : DiffUtil.ItemCallback<Place>() {
+        override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
+            return oldItem.placeId == newItem.placeId
+        }
+
+        override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
+            return oldItem.equals(newItem) // overridden equals method in place.kt
+        }
     }
 
 }

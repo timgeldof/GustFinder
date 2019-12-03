@@ -45,7 +45,7 @@ class UserPlacesFragment : Fragment() {
         viewModel.myPlaces.observe(this,
             Observer {
                     places ->
-                        adapter.data = places
+                        adapter.submitList(places)
             }
         )
         viewModel.navigateToSelectedPlace.observe(this,
