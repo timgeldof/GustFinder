@@ -6,6 +6,11 @@ This app will try to help you find out about the weather conditions relevant to 
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+## Documentation
+
+You can find the generated javadoc for this project [here](javadoc/app/index.md) 
+
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
