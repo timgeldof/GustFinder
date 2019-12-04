@@ -4,5 +4,5 @@
 
 `HomeFragment()`
 
-A simple [Fragment](#) subclass.
+First [Fragment](#) in the navhost fragment which contains a menu for navigation
 

@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [HomeFragment](-home-fragment/index.md) | A simple [Fragment](#) subclass.`class HomeFragment : Fragment` |
+| [HomeFragment](-home-fragment/index.md) | First [Fragment](#) in the navhost fragment which contains a menu for navigation`class HomeFragment : Fragment` |

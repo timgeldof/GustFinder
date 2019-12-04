@@ -1,0 +1,8 @@
+[app](../../index.md) / [com.timgeldof.gustfinder.network.models.searchApi](../index.md) / [Result](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`Result(areaName: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`AreaName`](../-area-name/index.md)`>, country: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Country`](../-country/index.md)`>, region: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Region`](../-region/index.md)`>, latitude: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, longitude: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, population: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, weatherUrl: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`WeatherUrl`](../-weather-url/index.md)`>)`
+
+The Search API location result for the given query parameters
+

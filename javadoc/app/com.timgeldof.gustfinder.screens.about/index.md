@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [AboutFragment](-about-fragment/index.md) | A simple [Fragment](#) subclass.`class AboutFragment : Fragment` |
+| [AboutFragment](-about-fragment/index.md) | A subclass of [Fragment](#) that inflates an view which shows you information about the app.`class AboutFragment : Fragment` |

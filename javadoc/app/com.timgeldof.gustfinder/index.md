@@ -6,8 +6,8 @@
 
 | Name | Summary |
 |---|---|
+| [GustApplication](-gust-application/index.md) | A simple [Application](https://developer.android.com/reference/android/app/Application.html) subclass.`class GustApplication : `[`Application`](https://developer.android.com/reference/android/app/Application.html) |
 | [MainActivity](-main-activity/index.md) | `class MainActivity : AppCompatActivity` |
-| [MyApplication](-my-application/index.md) | `class MyApplication : `[`Application`](https://developer.android.com/reference/android/app/Application.html) |
 
 ### Extensions for External Classes
 

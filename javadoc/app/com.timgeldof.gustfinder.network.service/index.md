@@ -6,8 +6,8 @@
 
 | Name | Summary |
 |---|---|
-| [GustFinderApi](-gust-finder-api/index.md) | `object GustFinderApi` |
-| [GustFinderApiService](-gust-finder-api-service/index.md) | `interface GustFinderApiService` |
+| [GustFinderApi](-gust-finder-api/index.md) | contains a lazily instantiated instance of [GustFinderApiService](-gust-finder-api-service/index.md)`object GustFinderApi` |
+| [GustFinderApiService](-gust-finder-api-service/index.md) | interface used by retrofit to implement API calls`interface GustFinderApiService` |
 
 ### Properties
 

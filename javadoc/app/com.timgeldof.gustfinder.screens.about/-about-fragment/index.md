@@ -4,13 +4,13 @@
 
 `class AboutFragment : Fragment`
 
-A simple [Fragment](#) subclass.
+A subclass of [Fragment](#) that inflates an view which shows you information about the app.
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | A simple [Fragment](#) subclass.`AboutFragment()` |
+| [&lt;init&gt;](-init-.md) | A subclass of [Fragment](#) that inflates an view which shows you information about the app.`AboutFragment()` |
 
 ### Functions
 

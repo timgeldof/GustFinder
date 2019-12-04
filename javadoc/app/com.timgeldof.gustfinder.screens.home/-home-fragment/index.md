@@ -4,13 +4,13 @@
 
 `class HomeFragment : Fragment`
 
-A simple [Fragment](#) subclass.
+First [Fragment](#) in the navhost fragment which contains a menu for navigation
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | A simple [Fragment](#) subclass.`HomeFragment()` |
+| [&lt;init&gt;](-init-.md) | First [Fragment](#) in the navhost fragment which contains a menu for navigation`HomeFragment()` |
 
 ### Functions
 

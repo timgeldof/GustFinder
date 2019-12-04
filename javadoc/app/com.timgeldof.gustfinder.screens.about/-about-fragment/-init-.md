@@ -4,5 +4,5 @@
 
 `AboutFragment()`
 
-A simple [Fragment](#) subclass.
+A subclass of [Fragment](#) that inflates an view which shows you information about the app.
 

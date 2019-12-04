@@ -4,6 +4,8 @@
 
 `object GustFinderApi`
 
+contains a lazily instantiated instance of [GustFinderApiService](../-gust-finder-api-service/index.md)
+
 ### Properties
 
 | Name | Summary |

@@ -3,3 +3,6 @@
 # placeDatabaseDao
 
 `abstract val placeDatabaseDao: `[`PlaceDatabaseDao`](../-place-database-dao/index.md)
+
+This property of class [PlaceDatabaseDao](../-place-database-dao/index.md) is publicly available to all classes to support api calls
+

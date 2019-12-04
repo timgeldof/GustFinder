@@ -3,3 +3,6 @@
 # &lt;init&gt;
 
 `GustDatabase()`
+
+GustDatabase extends the [RoomDatabase](#) class for usage within the Gustfinder app
+
