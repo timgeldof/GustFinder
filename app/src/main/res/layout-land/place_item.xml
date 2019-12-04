@@ -9,16 +9,17 @@
     </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             card_view:cardElevation="10dp"
-            card_view:cardPreventCornerOverlap="false"
-            android:layout_margin="20dp">
+            card_view:cardPreventCornerOverlap="false">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,13 +32,12 @@
 
                     <TextView
                         android:id="@+id/txt_city_name"
+                        style="@style/bigText"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/quicksand"
                         android:padding="10dp"
                         android:text="@{place.area}"
-                        android:textSize="@dimen/Title"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -51,6 +51,7 @@
 
                 <TextView
                     android:id="@+id/txt_country"
+                    style="@style/smallText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand"
@@ -59,6 +60,7 @@
 
                 <TextView
                     android:id="@+id/txt_region"
+                    style="@style/smallText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand"

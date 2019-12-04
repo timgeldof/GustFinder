@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather
 import com.timgeldof.gustfinder.network.service.GustFinderApi
+import com.timgeldof.gustfinder.screens.addPlace.ApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,8 +27,14 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
     val weather: LiveData<List<Weather>>
         get() = _weather
 
+    private val _status = MutableLiveData<ApiStatus>()
+
+    val status: LiveData<ApiStatus>
+        get() = _status
+
     init {
         getForecasts()
+        _status.value = ApiStatus.ERROR
     }
     /**
      * Sets the weather [LiveData] value to the response of the api
@@ -36,8 +43,11 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
         val latAndLon = place.latitude + "," + place.longitude
         uiScope.launch {
             try {
+                _status.value = ApiStatus.LOADING
                 _weather.value = GustFinderApi.retrofitService.getForecastAsync(latAndLon).await().data.weather
+                _status.value = ApiStatus.DONE
             } catch (t: Throwable) {
+                _status.value = ApiStatus.ERROR
             }
         }
     }

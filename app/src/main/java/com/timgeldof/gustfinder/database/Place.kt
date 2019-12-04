@@ -22,5 +22,4 @@ data class Place(
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var placeId: Long = 0L
-
 }

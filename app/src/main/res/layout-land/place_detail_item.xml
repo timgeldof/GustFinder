@@ -9,10 +9,11 @@
             name="weather"
             type="com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather" />
     </data>
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView2"
@@ -34,9 +35,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_cardview_options"
             card_view:cardElevation="10dp"
-            card_view:cardPreventCornerOverlap="false"
-            android:layout_margin="@dimen/margin_cardview_options">
+            card_view:cardPreventCornerOverlap="false">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -46,63 +47,64 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
-
-                            <ImageView
-                                android:id="@+id/img_morning_forecast"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:layout_margin="10dp"
-                                app:glideSrc="@{weather.hourly[3].getWeatherIconUrl()}"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/wind_icon" />
-
-                            <LinearLayout
-                                android:id="@+id/linearLayout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/img_morning_forecast"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                                <TextView
-                                    android:id="@+id/textView6"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/quicksand"
-                                    android:text="@string/time_morning"
-                                    android:textAlignment="center"
-                                    android:textSize="24sp" />
-
-                                <TextView
-                                    android:id="@+id/txt_morning_forecast"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/quicksand"
-                                    android:text="@{weather.hourly[3].getSurfStatistics()}"
-                                    android:textAlignment="center"
-                                    tools:text="@android:string/httpErrorUnsupportedScheme" />
-                            </LinearLayout>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_morning_forecast"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            app:glideSrc="@{weather.hourly[3].getWeatherIconUrl()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/wind_icon" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_morning_forecast"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@string/time_morning"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/txt_morning_forecast"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/quicksand"
+                                android:text="@{weather.hourly[3].getSurfStatistics()}"
+                                android:textAlignment="center"
+                                tools:text="@android:string/httpErrorUnsupportedScheme" />
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/img_noon_forecast"
@@ -149,11 +151,12 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/img_afternoon_forecast"
@@ -200,11 +203,12 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/img_evening_forecast"

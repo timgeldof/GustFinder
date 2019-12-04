@@ -10,8 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.databinding.UserPlacesFragmentBinding
@@ -46,7 +44,6 @@ class UserPlacesFragment : Fragment() {
             }
         )
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         viewModel.myPlaces.observe(viewLifecycleOwner,
             Observer {
                     places ->

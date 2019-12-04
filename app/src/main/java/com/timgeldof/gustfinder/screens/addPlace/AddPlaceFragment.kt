@@ -11,8 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.databinding.AddPlaceFragmentBinding
@@ -43,7 +41,6 @@ class AddPlaceFragment : Fragment() {
         val viewModelFactory = AddPlaceViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddPlaceViewModel::class.java)
         binding.viewModel = viewModel
-        binding.searchResultRecyclerview.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         val adapter = AddPlaceAdapter(AddPlaceAdapter.OnClickListener {
             uiScope.launch {

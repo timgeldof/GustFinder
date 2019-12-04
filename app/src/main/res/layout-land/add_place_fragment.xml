@@ -9,19 +9,22 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:hint="@string/hint_text">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_place_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -29,16 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:apiStatus="@{viewModel.status}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_result_recyclerview"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="650dp"
             android:layout_height="match_parent"
-            android:layout_margin="20dp" />
-
-
-
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2" />
 
 
     </LinearLayout>
