@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
 
         binding.textMyPlaces.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_myPlacesFragment))
         binding.textMyMap.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_userMapFragment))
+        binding.textInterestingResources.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_newsFragment))
         setHasOptionsMenu(true)
 
         return binding.root

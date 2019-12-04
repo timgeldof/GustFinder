@@ -50,6 +50,11 @@ class PlaceDetailFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Sets the share intent in the action bar
+     *
+     * @param menu the android [Menu] in which the share menu is inflated
+     */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.share_menu, menu)

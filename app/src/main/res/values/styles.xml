@@ -10,10 +10,18 @@
     <style name="smallText">
         <item name="android:fontFamily">@font/quicksand</item>
         <item name="android:textSize">10sp</item>
+        <item name="android:gravity">center|center_horizontal</item>
+
     </style>
     <style name="bigText">
         <item name="android:fontFamily">@font/quicksand</item>
         <item name="android:textSize">30sp</item>
+        <item name="android:gravity">center|center_horizontal</item>
+    </style>
+    <style name="mediumText">
+        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center|center_horizontal</item>
     </style>
 
 </resources>

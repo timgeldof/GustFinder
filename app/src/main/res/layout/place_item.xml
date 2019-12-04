@@ -19,53 +19,61 @@
             card_view:cardElevation="10dp"
             card_view:cardPreventCornerOverlap="false"
             android:layout_margin="20dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txt_city_name"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/place_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:fontFamily="@font/quicksand"
-                        android:padding="10dp"
-                        android:text="@{place.area}"
-                        android:textSize="@dimen/Title"
-                        android:textStyle="bold" />
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_country"
+                            style="@style/bigText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:padding="10dp"
+                            android:text="@{place.country}" />
+
+                        <TextView
+                            android:id="@+id/txt_city_name"
+                            style="@style/smallText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:padding="10dp"
+                            android:text="@{place.area}"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_region"
+                            style="@style/smallText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:padding="10dp"
+                            android:text="@{place.region}" />
+                    </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/deleteButton"
+                        android:id="@+id/delete_button"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_margin="10dp"
                         android:layout_weight="0"
                         card_view:srcCompat="@drawable/remove_circle" />
+
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/txt_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/quicksand"
-                    android:padding="10dp"
-                    android:text="@{place.country}" />
-
-                <TextView
-                    android:id="@+id/txt_region"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/quicksand"
-                    android:padding="10dp"
-                    android:text="@{place.region}" />
-
-            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

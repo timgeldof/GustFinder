@@ -34,7 +34,7 @@ import java.util.Locale
             }
         }
 @BindingAdapter("glideSrc")
-fun ImageView.setResource(url: String) {
+fun ImageView.setResource(url: String?) {
     Glide.with(this.context).load(url).into(this)
 }
 @BindingAdapter("dateFormatted")

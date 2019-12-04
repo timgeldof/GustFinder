@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/textView"
-            style="@style/smallText"
+            style="@style/mediumText"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/quicksand"
-            android:text="@string/lorem_ipsum"
+            android:text="@string/txt_about"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"

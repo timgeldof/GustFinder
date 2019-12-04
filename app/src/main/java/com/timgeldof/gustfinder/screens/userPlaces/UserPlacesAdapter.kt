@@ -2,14 +2,18 @@ package com.timgeldof.gustfinder.screens.userPlaces
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.PlaceItemBinding
-
+/**
+ * A [ListAdapter] subclass
+ *
+ * @param onClickDetailListener An OnClickListener parameter that is used to show the detail of the place
+ * @param onClickDeleteListener An OnClickListener parameter that is used to set the delete action on the delete button
+ */
 class UserPlacesAdapter(private val onClickDetailListener: OnClickListener, private val onClickDeleteListener: OnClickListener) : ListAdapter<Place, UserPlacesAdapter.PlaceViewHolder>(PlacesCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
@@ -21,18 +25,19 @@ class UserPlacesAdapter(private val onClickDetailListener: OnClickListener, priv
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         val place = getItem(position)
-        holder.binding.place = place
-        holder.binding.txtCityName.setOnClickListener {
-            onClickDetailListener.onClick(place)
-        }
-        holder.binding.deleteButton.setOnClickListener {
-            onClickDeleteListener.onClick(place)
-        }
+        holder.bind(place, onClickDetailListener, onClickDeleteListener)
     }
 
     class PlaceViewHolder(val binding: PlaceItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val cityName: TextView = binding.txtCityName
-        val country: TextView = binding.txtCountry
+        fun bind(place: Place, onClickDetailListener: OnClickListener, onClickDeleteListener: OnClickListener) {
+            binding.place = place
+            binding.placeContent.setOnClickListener {
+                onClickDetailListener.onClick(place)
+            }
+            binding.deleteButton.setOnClickListener {
+                onClickDeleteListener.onClick(place)
+            }
+        }
     }
 
     class OnClickListener(val clickListener: (place: Place) -> Unit) {

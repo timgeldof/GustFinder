@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_userMapFragment"
             app:destination="@id/userMapFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPlacesFragment"
@@ -65,4 +68,8 @@
         android:id="@+id/userMapFragment"
         android:name="com.timgeldof.gustfinder.screens.userMap.UserMapFragment"
         android:label="My Map" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.timgeldof.gustfinder.screens.news.NewsFragment"
+        android:label="NewsFragment" />
 </navigation>

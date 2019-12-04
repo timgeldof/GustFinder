@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.timgeldof.gustfinder.database.GustDatabase
@@ -27,14 +28,22 @@ class UserMapFragment : Fragment(), OnMapReadyCallback {
     lateinit var mapView: MapView
     lateinit var viewModel: UserMapViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = MyPlacesMapFragmentBinding.inflate(inflater, container, false)
         val database = GustDatabase.getInstance(context!!).placeDatabaseDao
         val viewModelFactory = UserMapViewModelFactory(database)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserMapViewModel::class.java)
         return binding.root
     }
-
+    /**
+     * Calls the superclass onViewCreatedMethod and sets the [MapView] property to that of the binding object
+     *
+     * @param item the selected menu item
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,21 +79,33 @@ class UserMapFragment : Fragment(), OnMapReadyCallback {
         super.onDestroy()
     }
 
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+    /**
+     * When the map is ready, the markers are places onto the map using the [placeMarker] method
+     *
+     * @param item the selected menu item
+     */
     override fun onMapReady(googleMap: GoogleMap?) {
         MapsInitializer.initialize(context)
         myGoogleMap = googleMap!!
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         viewModel.myPlaces.observe(this,
-            Observer {
-                    places ->
+            Observer { places ->
                 for (place in places) {
                     placeMarker(place)
                 }
             }
         )
     }
-
-    private fun placeMarker(place: Place) {
+    /**
+     * Creates a marker with the coordinates from the [Place] parameter. It adds the name of the area as well as the region to the info box
+     *
+     * @param place the [Place] variable for which the marker must be placed
+     */
+    fun placeMarker(place: Place) {
         var marker = myGoogleMap.addMarker(
             MarkerOptions().position(
                 LatLng(
@@ -95,5 +116,6 @@ class UserMapFragment : Fragment(), OnMapReadyCallback {
         )
         marker.title = place.area
         marker.snippet = place.region
+        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
     }
 }

@@ -22,15 +22,17 @@
             card_view:cardPreventCornerOverlap="false">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_city_name"
@@ -43,30 +45,30 @@
                         android:textSize="@dimen/Title"
                         android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_weight="0"
-                        android:background="@drawable/add_icon" />
+                    <TextView
+                        android:id="@+id/txt_country"
+                        style="@style/smallText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@{place.country}" />
+
+                    <TextView
+                        android:id="@+id/txt_region"
+                        style="@style/smallText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@{place.region}" />
+
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txt_country"
-                    style="@style/smallText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@{place.country}" />
-
-                <TextView
-                    android:id="@+id/txt_region"
-                    style="@style/smallText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@{place.region}" />
-
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/add_icon" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

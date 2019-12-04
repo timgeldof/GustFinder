@@ -39,7 +39,7 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
     /**
      * Sets the weather [LiveData] value to the response of the api
      */
-    fun getForecasts() {
+    private fun getForecasts() {
         val latAndLon = place.latitude + "," + place.longitude
         uiScope.launch {
             try {
