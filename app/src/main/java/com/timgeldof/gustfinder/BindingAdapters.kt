@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -33,14 +34,26 @@ import java.util.Locale
                 }
             }
         }
+/**
+ *  This binding adapter sets the source of the image with Glide
+ *  Glide caches this image for optimization
+ * @param url: the url of the image resource
+ */
 @BindingAdapter("glideSrc")
 fun ImageView.setResource(url: String?) {
-    Glide.with(this.context).load(url).into(this)
+    Glide.with(this.context)
+        .load(url)
+        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+        .into(this)
 }
+/**
+ *  Formats the date with the English Locale
+ *  @param text: the url of the image resource
+ */
 @BindingAdapter("dateFormatted")
 fun TextView.SetDateFormatted(text: String) {
-    var parsedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val date: LocalDate = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyy-MM-dd"))
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val date: LocalDate = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         val formattedDate: String = date.dayOfWeek.name.toLowerCase() + " " + date.dayOfMonth.toString() + " " + date.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH).toLowerCase()
         this.setText(formattedDate)
     } else {

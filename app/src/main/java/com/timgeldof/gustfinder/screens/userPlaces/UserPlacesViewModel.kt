@@ -1,16 +1,8 @@
 package com.timgeldof.gustfinder.screens.userPlaces
 
-import android.app.Application
-import android.content.res.Resources
-import android.os.Build
-import android.text.Html
-import android.text.Spanned
-import android.util.Log
-import androidx.core.text.HtmlCompat
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.database.PlaceDatabaseDao
 import kotlinx.coroutines.CoroutineScope
@@ -18,9 +10,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
-import java.lang.StringBuilder
 
-class UserPlacesViewModel(val database: PlaceDatabaseDao, application: Application) : AndroidViewModel(application) {
+/**
+ * Subclass of the [ViewModel] class
+ */
+class UserPlacesViewModel(val database: PlaceDatabaseDao) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -34,69 +28,46 @@ class UserPlacesViewModel(val database: PlaceDatabaseDao, application: Applicati
             get() = _myPlaces
 
     init {
-        Log.i("UserPlacesViewModel", "Init called")
         _myPlaces = database.getAllPlaces()
     }
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
-        Log.i("UserPlacesViewModel", "OnCleared called")
     }
+    /**
+     * Sets the navigation [LiveData] which triggers a navigation in the fragment when changed
+     */
     fun displayPlaceDetails(place: Place) {
         _navigateToSelectedPlace.value = place
     }
+    /**
+     * Resets the navigation [LiveData] which triggers a navigation in the fragment when changed
+     */
     fun displayPlaceDetailsComplete() {
         _navigateToSelectedPlace.value = null
     }
-
-    private suspend fun insert(place: Place) {
-        withContext(Dispatchers.IO) {
-            database.insert(place)
-        }
-    }
-
-    private suspend fun clear() {
-        withContext(Dispatchers.IO) {
-            database.clear()
-        }
-    }
+    /**
+     * Remove a place from the user_places table within the IO coroutine context
+     * @param place the place to be removed
+     */
     private suspend fun removePlace(place: Place) {
         withContext(Dispatchers.IO) {
             database.removePlace(place.placeId)
         }
     }
-    val placesString = Transformations.map(myPlaces) {
-        places -> formatPlaces(places, application.resources)
-    }
-
-    fun formatPlaces(places: List<Place>, resources: Resources): Spanned {
-        val stringBuilder = StringBuilder()
-        stringBuilder.apply {
-            places.forEach { place ->
-                append(place.area)
-                append("<br>")
-                append(place.country)
-                append("<br>")
-            }
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            return Html.fromHtml(stringBuilder.toString(), Html.FROM_HTML_MODE_LEGACY)
-        else
-            return HtmlCompat.fromHtml(stringBuilder.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
-
+    /**
+     * Fetches the places from the database and sets it to the value of the _myPlaces [LiveData] property within a coroutine
+     */
     fun getPlacesFromDB() {
         uiScope.launch {
             _myPlaces = database.getAllPlaces()
         }
     }
-
-    fun removeAllPlacesFromDatabase() {
-        uiScope.launch {
-            clear()
-        }
-    }
+    /**
+     * Removes the place from database user_places table within a coroutine
+     * @param place the place to be removed
+     */
     fun removePlaceFromDatabase(place: Place) {
         uiScope.launch {
             removePlace(place)

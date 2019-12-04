@@ -43,6 +43,9 @@ class UserPlacesAdapter(private val onClickDetailListener: OnClickListener, priv
     class OnClickListener(val clickListener: (place: Place) -> Unit) {
         fun onClick(place: Place) = clickListener(place)
     }
+    /**
+     * Callback class used to calculate the difference between two [Place] lists for optimizing the [RecyclerView] updating efficiency.
+     */
     class PlacesCallBack() : DiffUtil.ItemCallback<Place>() {
         override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
             return oldItem.placeId == newItem.placeId

@@ -15,7 +15,8 @@ import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.databinding.UserPlacesFragmentBinding
 
 /**
- * A simple [Fragment] subclass.
+ * A [Fragment] subclass which sets up the view containing the places that were saved by the user
+ *
  */
 class UserPlacesFragment : Fragment() {
 
@@ -27,12 +28,12 @@ class UserPlacesFragment : Fragment() {
             R.layout.user_places_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
-
         val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
-        val viewModelFactory = UserPlacesViewModelFactory(dataSource, application)
-        binding.setLifecycleOwner(this)
-
+        val viewModelFactory = UserPlacesViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
+
+        binding.lifecycleOwner = this
+
         binding.userPlacesViewModel = viewModel
         val adapter = UserPlacesAdapter(
             UserPlacesAdapter.OnClickListener {
@@ -62,6 +63,7 @@ class UserPlacesFragment : Fragment() {
             }
         )
         binding.addPlaceButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_myPlacesFragment_to_addPlaceFragment))
+
         return binding.root
     }
 }
