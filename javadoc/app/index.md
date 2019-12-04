@@ -1,5 +1,3 @@
-[app](./index.md)
-
 ### Gustfinder app documentation
 
 ### Packages
