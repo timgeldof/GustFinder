@@ -16,7 +16,7 @@ import com.timgeldof.gustfinder.databinding.FragmentNewsBinding
  */
 class NewsFragment : Fragment() {
 
-    private val SURF_URL = "https://www.surfline.com/surf-news/"
+    private val SURF_URL = "https://www.worldsurfleague.com/"
     private lateinit var webView: WebView
 
     override fun onCreateView(

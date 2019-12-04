@@ -37,23 +37,23 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_country"
-                            style="@style/bigText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/quicksand"
-                            android:padding="10dp"
-                            android:text="@{place.country}" />
-
-                        <TextView
                             android:id="@+id/txt_city_name"
-                            style="@style/smallText"
+                            style="@style/bigText"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/quicksand"
                             android:padding="10dp"
                             android:text="@{place.area}"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_country"
+                            style="@style/smallText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand"
+                            android:padding="10dp"
+                            android:text="@{place.country}" />
 
                         <TextView
                             android:id="@+id/txt_region"
