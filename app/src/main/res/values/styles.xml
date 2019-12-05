@@ -1,8 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorBlue</item>
         <item name="colorPrimaryDark">@color/colorDarkBlue</item>
         <item name="colorAccent">@color/colorLightBlue</item>
@@ -23,5 +21,9 @@
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center|center_horizontal</item>
     </style>
+    <style name="lightBlueBackGround">
+        <item name="android:background">@color/colorLightBlue</item>
+    </style>
+
 
 </resources>
