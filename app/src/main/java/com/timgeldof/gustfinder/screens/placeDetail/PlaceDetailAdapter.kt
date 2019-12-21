@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.timgeldof.gustfinder.database.realm.RealmWeather
 import com.timgeldof.gustfinder.databinding.PlaceDetailItemBinding
 import com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather
 
-class PlaceDetailAdapter : ListAdapter<Weather, PlaceDetailAdapter.PlaceDetailViewHolder>(WeatherDiffCallback()) {
+class PlaceDetailAdapter : ListAdapter<RealmWeather, PlaceDetailAdapter.PlaceDetailViewHolder>(RealmWeatherDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceDetailViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -25,20 +26,20 @@ class PlaceDetailAdapter : ListAdapter<Weather, PlaceDetailAdapter.PlaceDetailVi
          *
          * @param weather returned by the marine weather api
          */
-        fun bind(weather: Weather) {
+        fun bind(weather: RealmWeather) {
             binding.weather = weather
         }
     }
     /**
      * Callback class used to calculate the difference between two [Weather] lists for optimizing the recyclerview efficiency.
      */
-    class WeatherDiffCallback : DiffUtil.ItemCallback<Weather>() {
-        override fun areItemsTheSame(oldItem: Weather, newItem: Weather): Boolean {
-            return oldItem.date == newItem.date
+    class RealmWeatherDiffCallback : DiffUtil.ItemCallback<RealmWeather>() {
+        override fun areItemsTheSame(oldItem: RealmWeather, newItem: RealmWeather): Boolean {
+            return false
         }
 
-        override fun areContentsTheSame(oldItem: Weather, newItem: Weather): Boolean {
-            return oldItem.hourly == newItem.hourly
+        override fun areContentsTheSame(oldItem: RealmWeather, newItem: RealmWeather): Boolean {
+            return false
         }
     }
 }

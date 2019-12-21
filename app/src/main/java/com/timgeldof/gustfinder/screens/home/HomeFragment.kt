@@ -1,6 +1,7 @@
 package com.timgeldof.gustfinder.screens.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -14,6 +15,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.databinding.HomeFragmentBinding
+import io.realm.Realm
+import io.realm.RealmQuery
 
 /**
  * First [Fragment] in the navhost fragment which contains a menu for navigation
@@ -29,7 +32,14 @@ class HomeFragment : Fragment() {
         binding.textInterestingResources.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_newsFragment))
         setHasOptionsMenu(true)
 
+        val realm = Realm.getDefaultInstance()
+
         return binding.root
+
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

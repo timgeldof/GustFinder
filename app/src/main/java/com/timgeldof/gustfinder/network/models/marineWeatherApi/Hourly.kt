@@ -1,4 +1,9 @@
 package com.timgeldof.gustfinder.network.models.marineWeatherApi
+
+import com.timgeldof.gustfinder.database.realm.RealmWeatherIconUrl
+import io.realm.Realm
+import io.realm.RealmList
+
 /**
  * Contains hourly information used in the [Weather] class
  */
@@ -82,5 +87,10 @@ data class Hourly(
                 "Wind gust speed: " + getWindGustFormatted() + "\n" +
                 "Swell height: " + getSwellHeightFormatted() + "\n" +
                 "Swell direction: " + getSwellDir16point() + "\n"
+    }
+    fun weatherIconUrlAsRealm(): RealmList<RealmWeatherIconUrl> {
+        val realmWeatherIcon = RealmList<RealmWeatherIconUrl>()
+        realmWeatherIcon.add(RealmWeatherIconUrl(this.weatherIconUrl[0].value))
+        return realmWeatherIcon
     }
 }

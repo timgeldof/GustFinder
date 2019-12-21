@@ -7,7 +7,7 @@
     <data>
         <variable
             name="weather"
-            type="com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather" />
+            type="com.timgeldof.gustfinder.database.realm.RealmWeather" />
     </data>
     <LinearLayout
         android:orientation="vertical"
@@ -28,7 +28,7 @@
             android:fontFamily="@font/quicksand"
             android:textAlignment="center"
             android:textStyle="bold"
-            app:dateFormatted="@{weather.date}"
+            app:dateFormatted="@{weather.getDate()}"
             tools:text="maandag 5 oktober" />
 
         <androidx.cardview.widget.CardView

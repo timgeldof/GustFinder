@@ -15,7 +15,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.timgeldof.gustfinder.R
+import com.timgeldof.gustfinder.database.realm.RealmWeather
 import com.timgeldof.gustfinder.databinding.PlaceDetailFragmentBinding
+import io.realm.Realm
+import io.realm.RealmResults
+import io.realm.RealmChangeListener
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -40,8 +46,9 @@ class PlaceDetailFragment : Fragment() {
         binding.forecastRecyclerView.adapter = adapter
         snapHelper.attachToRecyclerView(binding.forecastRecyclerView)
 
-        viewModel.weather.observe(this, Observer {
-            adapter.submitList(it)
+        viewModel.dbWeather.observe(this, Observer {
+            var weatherList = it.toList().sortedBy { t -> t.created }
+            adapter.submitList(weatherList)
         })
 
         Toast.makeText(context, "Swipe right for more", Toast.LENGTH_LONG).show()

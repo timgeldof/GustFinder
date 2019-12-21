@@ -4,10 +4,18 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.timgeldof.gustfinder.GustApplication
+import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.database.Place
+import com.timgeldof.gustfinder.database.realm.RealmWeather
 import com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather
 import com.timgeldof.gustfinder.network.service.GustFinderApi
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus
+import com.timgeldof.gustfinder.screens.addPlace.ApiStatus.DONE
+import com.timgeldof.gustfinder.screens.addPlace.ApiStatus.LOADING
+import io.realm.Realm
+import io.realm.RealmResults
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -27,14 +35,29 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
     val weather: LiveData<List<Weather>>
         get() = _weather
 
+
     private val _status = MutableLiveData<ApiStatus>()
 
     val status: LiveData<ApiStatus>
         get() = _status
 
+    private val database = GustDatabase.getInstance(GustApplication.applicationContext())
+    private val repository = GustRepository(database)
+
+    private val _dbWeather : LiveData<RealmResults<RealmWeather>> = repository.getWeather(place)
+
+    val dbWeather: LiveData<RealmResults<RealmWeather>>
+    get() = _dbWeather
+
     init {
-        getForecasts()
-        _status.value = ApiStatus.ERROR
+        _status.value = DONE
+        uiScope.launch {
+            _status.value = LOADING
+            repository.refreshWeather(place)
+            _status.value = DONE
+        }
+
+        //_status.value = ApiStatus.ERROR
     }
     /**
      * Sets the weather [LiveData] value to the response of the api
@@ -45,27 +68,29 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
             try {
                 _status.value = ApiStatus.LOADING
                 _weather.value = GustFinderApi.retrofitService.getForecastAsync(latAndLon).await().data.weather
-                _status.value = ApiStatus.DONE
+                _status.value = DONE
             } catch (t: Throwable) {
                 _status.value = ApiStatus.ERROR
             }
         }
     }
+
     /**
      * Creates a share intent to share the forecasts of the current day
      * @return the share intent
      */
     fun shareWeatherIntent(): Intent {
         val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT,
-                "The conditions for ${place.area} seem interesting for today!\n" +
-                        "Perhaps we can meet up sometimes for a surf session?\n\n" +
-                        "09:00\n${_weather.value!![0].hourly[3].getSurfStatistics()}\n" +
-                        "12:00\n${_weather.value!![0].hourly[4].getSurfStatistics()}\n" +
-                        "15:00\n${_weather.value!![0].hourly[5].getSurfStatistics()}\n" +
-                        "18:00\n${_weather.value!![0].hourly[6].getSurfStatistics()}\n")
-                    type = "text/plain"
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT,
+                    "The conditions for ${place.area} seem interesting for today!\n" +
+                            "Perhaps we can meet up sometimes for a surf session?\n\n" +
+                            "09:00\n${dbWeather.value!![0]!!.hourly[3]!!.getSurfStatistics()}\n" +
+                            "12:00\n${dbWeather.value!![0]!!.hourly[4]!!.getSurfStatistics()}\n" +
+                            "15:00\n${dbWeather.value!![0]!!.hourly[5]!!.getSurfStatistics()}\n" +
+                            "18:00\n${dbWeather.value!![0]!!.hourly[6]!!.getSurfStatistics()}\n")
+                type = "text/plain"
+
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
         return shareIntent

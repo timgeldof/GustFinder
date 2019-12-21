@@ -1,7 +1,10 @@
 package com.timgeldof.gustfinder
 
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
@@ -14,6 +17,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.network.networkAvailable
+import kotlinx.coroutines.*
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -30,9 +36,19 @@ class SearchForGibberishLocationAndCheckWhetherResultIsEmpty {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val database = GustDatabase.getInstance(GustApplication.applicationContext()).placeDatabaseDao
+
+
 
     @Test
     fun searchForGibberishLocationAndCheckWhetherResultIsEmpty() {
+        uiScope.launch {
+            clearDatabase()
+        }
+
+        if(networkAvailable(GustApplication.applicationContext())){
         val appCompatImageButton = onView(
             allOf(
                 withContentDescription("Open navigation drawer"),
@@ -97,6 +113,10 @@ class SearchForGibberishLocationAndCheckWhetherResultIsEmpty {
             )
         )
         imageView.check(matches(isDisplayed()))
+        } else {
+            Log.i("TEST", "Test only suitable when the device is online")
+
+        }
     }
 
     private fun childAtPosition(
@@ -117,4 +137,10 @@ class SearchForGibberishLocationAndCheckWhetherResultIsEmpty {
             }
         }
     }
+    suspend fun clearDatabase() {
+        withContext(Dispatchers.IO) {
+            database.clear()
+        }
+    }
+
 }

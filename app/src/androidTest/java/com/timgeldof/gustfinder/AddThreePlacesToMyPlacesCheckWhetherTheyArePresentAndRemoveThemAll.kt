@@ -1,7 +1,10 @@
 package com.timgeldof.gustfinder
 
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
@@ -14,6 +17,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withClassName
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.network.networkAvailable
+import kotlinx.coroutines.*
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -32,392 +38,402 @@ class AddThreePlacesToMyPlacesCheckWhetherTheyArePresentAndRemoveThemAll {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
-
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val database = GustDatabase.getInstance(GustApplication.applicationContext()).placeDatabaseDao
     @Test
     fun addThreePlacesToMyPlacesAndRemoveThemAll() {
-        val appCompatTextView = onView(
-            allOf(
-                withId(R.id.text_my_places), withText("My places"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.cardView),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatTextView.perform(click())
+        uiScope.launch {
+            clearDatabase()
+        }
+        if(networkAvailable(GustApplication.applicationContext())) {
 
-        val floatingActionButton = onView(
-            allOf(
-                withId(R.id.add_place_button),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.main_content),
+            val appCompatTextView = onView(
+                allOf(
+                    withId(R.id.text_my_places), withText("My places"),
+                    childAtPosition(
                         childAtPosition(
-                            withId(R.id.myNavHostFragment),
+                            withId(R.id.cardView),
                             0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        floatingActionButton.perform(click())
-
-        val textInputEditText = onView(
-            allOf(
-                withId(R.id.add_place_text_field),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                        ),
                         0
                     ),
-                    0
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        textInputEditText.perform(replaceText("Aveiro"), closeSoftKeyboard())
-        Thread.sleep(5000)
-        val appCompatButton = onView(
-            allOf(
-                withId(R.id.button),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
-                        0
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatButton.perform(click())
+            appCompatTextView.perform(click())
 
-        val floatingActionButton2 = onView(
-            allOf(
-                withId(R.id.add_place_button),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.main_content),
+            val floatingActionButton = onView(
+                allOf(
+                    withId(R.id.add_place_button),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.main_content),
+                            childAtPosition(
+                                withId(R.id.myNavHostFragment),
+                                0
+                            )
+                        ),
+                        1
+                    ),
+                    isDisplayed()
+                )
+            )
+            floatingActionButton.perform(click())
+
+            val textInputEditText = onView(
+                allOf(
+                    withId(R.id.add_place_text_field),
+                    childAtPosition(
                         childAtPosition(
-                            withId(R.id.myNavHostFragment),
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
                             0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        floatingActionButton2.perform(click())
-
-        val textInputEditText2 = onView(
-            allOf(
-                withId(R.id.add_place_text_field),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                        ),
                         0
                     ),
-                    0
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        textInputEditText2.perform(click())
-
-        val textInputEditText3 = onView(
-            allOf(
-                withId(R.id.add_place_text_field),
-                childAtPosition(
+            textInputEditText.perform(replaceText("Aveiro"), closeSoftKeyboard())
+            Thread.sleep(5000)
+            val appCompatButton = onView(
+                allOf(
+                    withId(R.id.button),
                     childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText3.perform(replaceText("Oostende"), closeSoftKeyboard())
-        Thread.sleep(5000)
-        val appCompatButton2 = onView(
-            allOf(
-                withId(R.id.button),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
-                        0
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatButton2.perform(click())
-
-        val floatingActionButton3 = onView(
-            allOf(
-                withId(R.id.add_place_button),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.main_content),
                         childAtPosition(
-                            withId(R.id.myNavHostFragment),
+                            withClassName(`is`("androidx.cardview.widget.CardView")),
                             0
-                        )
+                        ),
+                        3
                     ),
-                    1
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        floatingActionButton3.perform(click())
+            appCompatButton.perform(click())
 
-        val textInputEditText4 = onView(
-            allOf(
-                withId(R.id.add_place_text_field),
-                childAtPosition(
+            val floatingActionButton2 = onView(
+                allOf(
+                    withId(R.id.add_place_button),
                     childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
+                        allOf(
+                            withId(R.id.main_content),
+                            childAtPosition(
+                                withId(R.id.myNavHostFragment),
+                                0
+                            )
+                        ),
+                        1
                     ),
-                    0
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        textInputEditText4.perform(click())
+            floatingActionButton2.perform(click())
 
-        val textInputEditText5 = onView(
-            allOf(
-                withId(R.id.add_place_text_field),
-                childAtPosition(
+            val textInputEditText2 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field),
                     childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText5.perform(click())
-
-        val textInputEditText6 = onView(
-            allOf(
-                withId(R.id.add_place_text_field),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText6.perform(replaceText("loppem"), closeSoftKeyboard())
-        Thread.sleep(5000)
-        val textInputEditText7 = onView(
-            allOf(
-                withId(R.id.add_place_text_field), withText("loppem"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText7.perform(click())
-
-        val textInputEditText8 = onView(
-            allOf(
-                withId(R.id.add_place_text_field), withText("loppem"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText8.perform(replaceText("zarau"))
-        Thread.sleep(5000)
-        val textInputEditText9 = onView(
-            allOf(
-                withId(R.id.add_place_text_field), withText("zarau"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText9.perform(closeSoftKeyboard())
-
-        val appCompatButton3 = onView(
-            allOf(
-                withId(R.id.button),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
-                        0
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatButton3.perform(click())
-
-        val textView = onView(
-            allOf(
-                withId(R.id.txt_city_name), withText("Zarautz"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.place_content),
                         childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
                             0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Zarautz")))
-
-        val textView2 = onView(
-            allOf(
-                withId(R.id.txt_city_name), withText("Zarautz"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.place_content),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView2.check(matches(withText("Zarautz")))
-
-        val textView3 = onView(
-            allOf(
-                withId(R.id.txt_city_name), withText("Oostende"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.place_content),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView3.check(matches(withText("Oostende")))
-
-        val textView4 = onView(
-            allOf(
-                withId(R.id.txt_city_name), withText("Aveiro"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.place_content),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(withText("Aveiro")))
-
-        val textView5 = onView(
-            allOf(
-                withId(R.id.txt_city_name), withText("Aveiro"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.place_content),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView5.check(matches(withText("Aveiro")))
-
-        val appCompatImageView = onView(
-            allOf(
-                getElementFromMatchAtPosition(allOf(withId(R.id.delete_button)), 0),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
+                        ),
                         0
                     ),
-                    1
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        appCompatImageView.perform(click())
+            textInputEditText2.perform(click())
 
-        val appCompatImageView2 = onView(
-            allOf(
-                getElementFromMatchAtPosition(allOf(withId(R.id.delete_button)), 0),
-                childAtPosition(
+            val textInputEditText3 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field),
                     childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
                         0
                     ),
-                    1
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        appCompatImageView2.perform(click())
-
-        val appCompatImageView3 = onView(
-            allOf(
-                getElementFromMatchAtPosition(allOf(withId(R.id.delete_button)), 0),
-                childAtPosition(
+            textInputEditText3.perform(replaceText("Oostende"), closeSoftKeyboard())
+            Thread.sleep(5000)
+            val appCompatButton2 = onView(
+                allOf(
+                    withId(R.id.button),
                     childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
+                        childAtPosition(
+                            withClassName(`is`("androidx.cardview.widget.CardView")),
+                            0
+                        ),
+                        3
+                    ),
+                    isDisplayed()
+                )
+            )
+            appCompatButton2.perform(click())
+
+            val floatingActionButton3 = onView(
+                allOf(
+                    withId(R.id.add_place_button),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.main_content),
+                            childAtPosition(
+                                withId(R.id.myNavHostFragment),
+                                0
+                            )
+                        ),
+                        1
+                    ),
+                    isDisplayed()
+                )
+            )
+            floatingActionButton3.perform(click())
+
+            val textInputEditText4 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
                         0
                     ),
-                    1
-                ),
-                isDisplayed()
+                    isDisplayed()
+                )
             )
-        )
-        appCompatImageView3.perform(click())
+            textInputEditText4.perform(click())
+
+            val textInputEditText5 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textInputEditText5.perform(click())
+
+            val textInputEditText6 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textInputEditText6.perform(replaceText("loppem"), closeSoftKeyboard())
+            Thread.sleep(5000)
+            val textInputEditText7 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field), withText("loppem"),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textInputEditText7.perform(click())
+
+            val textInputEditText8 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field), withText("loppem"),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textInputEditText8.perform(replaceText("zarau"))
+            Thread.sleep(5000)
+            val textInputEditText9 = onView(
+                allOf(
+                    withId(R.id.add_place_text_field), withText("zarau"),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.textfield.TextInputLayout")),
+                            0
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textInputEditText9.perform(closeSoftKeyboard())
+
+            val appCompatButton3 = onView(
+                allOf(
+                    withId(R.id.button),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("androidx.cardview.widget.CardView")),
+                            0
+                        ),
+                        3
+                    ),
+                    isDisplayed()
+                )
+            )
+            appCompatButton3.perform(click())
+
+            val textView = onView(
+                allOf(
+                    withId(R.id.txt_city_name), withText("Zarautz"),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.place_content),
+                            childAtPosition(
+                                IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
+                                0
+                            )
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textView.check(matches(withText("Zarautz")))
+
+            val textView2 = onView(
+                allOf(
+                    withId(R.id.txt_city_name), withText("Zarautz"),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.place_content),
+                            childAtPosition(
+                                IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
+                                0
+                            )
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textView2.check(matches(withText("Zarautz")))
+
+            val textView3 = onView(
+                allOf(
+                    withId(R.id.txt_city_name), withText("Oostende"),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.place_content),
+                            childAtPosition(
+                                IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
+                                0
+                            )
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textView3.check(matches(withText("Oostende")))
+
+            val textView4 = onView(
+                allOf(
+                    withId(R.id.txt_city_name), withText("Aveiro"),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.place_content),
+                            childAtPosition(
+                                IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
+                                0
+                            )
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textView4.check(matches(withText("Aveiro")))
+
+            val textView5 = onView(
+                allOf(
+                    withId(R.id.txt_city_name), withText("Aveiro"),
+                    childAtPosition(
+                        allOf(
+                            withId(R.id.place_content),
+                            childAtPosition(
+                                IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
+                                0
+                            )
+                        ),
+                        0
+                    ),
+                    isDisplayed()
+                )
+            )
+            textView5.check(matches(withText("Aveiro")))
+
+            val appCompatImageView = onView(
+                allOf(
+                    getElementFromMatchAtPosition(allOf(withId(R.id.delete_button)), 0),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("androidx.cardview.widget.CardView")),
+                            0
+                        ),
+                        1
+                    ),
+                    isDisplayed()
+                )
+            )
+            appCompatImageView.perform(click())
+
+            val appCompatImageView2 = onView(
+                allOf(
+                    getElementFromMatchAtPosition(allOf(withId(R.id.delete_button)), 0),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("androidx.cardview.widget.CardView")),
+                            0
+                        ),
+                        1
+                    ),
+                    isDisplayed()
+                )
+            )
+            appCompatImageView2.perform(click())
+
+            val appCompatImageView3 = onView(
+                allOf(
+                    getElementFromMatchAtPosition(allOf(withId(R.id.delete_button)), 0),
+                    childAtPosition(
+                        childAtPosition(
+                            withClassName(`is`("androidx.cardview.widget.CardView")),
+                            0
+                        ),
+                        1
+                    ),
+                    isDisplayed()
+                )
+            )
+            appCompatImageView3.perform(click())
+        } else {
+            Log.i("TEST", "Test only suitable when the device is online")
+        }
     }
 
     private fun childAtPosition(
@@ -460,4 +476,10 @@ class AddThreePlacesToMyPlacesCheckWhetherTheyArePresentAndRemoveThemAll {
             }
         }
     }
+    suspend fun clearDatabase() {
+        withContext(Dispatchers.IO) {
+            database.clear()
+        }
+    }
+
 }

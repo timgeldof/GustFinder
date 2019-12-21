@@ -4,9 +4,11 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.timgeldof.gustfinder.network.networkAvailable
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -28,6 +30,11 @@ import java.util.Locale
                 ApiStatus.ERROR -> {
                     this.visibility = View.VISIBLE
                     setImageResource(R.drawable.empty_box)
+                    if(status == ApiStatus.ERROR){
+                        if(!networkAvailable(this.context!!)){
+                            Toast.makeText(this.context!!, "Internet not available", Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
                 ApiStatus.DONE -> {
                     this.visibility = View.GONE

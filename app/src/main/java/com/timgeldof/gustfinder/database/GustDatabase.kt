@@ -24,7 +24,8 @@ abstract class GustDatabase : RoomDatabase() {
          */
         fun getInstance(context: Context): GustDatabase {
             synchronized(this) {
-                var instance = INSTANCE
+                var instance =
+                    INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,

@@ -1,7 +1,10 @@
 package com.timgeldof.gustfinder
 
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
@@ -15,6 +18,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.Place
+import com.timgeldof.gustfinder.database.PlaceDatabaseDao
+import com.timgeldof.gustfinder.network.networkAvailable
+import kotlinx.coroutines.*
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -29,13 +37,22 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
 
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val database = GustDatabase.getInstance(GustApplication.applicationContext()).placeDatabaseDao
+
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
     fun addTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces() {
-        val appCompatTextView = onView(
+        // clear database if any places are present
+        uiScope.launch {
+            clearDatabase()
+        }
+        if(networkAvailable(GustApplication.applicationContext())){
+            val appCompatTextView = onView(
             allOf(
                 withId(R.id.text_my_places), withText("My places"),
                 childAtPosition(
@@ -46,8 +63,7 @@ class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
                     0
                 ),
                 isDisplayed()
-            )
-        )
+            ))
         appCompatTextView.perform(click())
 
         val floatingActionButton = onView(
@@ -160,6 +176,9 @@ class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
             )
         )
         appCompatImageView.perform(click())
+        } else {
+            Log.i("TEST", "Test only suitable when the device is online")
+        }
     }
 
     private fun childAtPosition(
@@ -180,4 +199,10 @@ class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
             }
         }
     }
+    suspend fun clearDatabase() {
+        withContext(Dispatchers.IO) {
+            database.clear()
+        }
+    }
+
 }
