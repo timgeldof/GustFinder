@@ -1,5 +1,6 @@
 package com.timgeldof.gustfinder
 
+import android.content.res.Resources
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
 import com.timgeldof.gustfinder.network.networkAvailable
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus
 import java.time.LocalDate
@@ -48,10 +50,15 @@ import java.util.Locale
  */
 @BindingAdapter("glideSrc")
 fun ImageView.setResource(url: String?) {
-    Glide.with(this.context)
-        .load(url)
-        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-        .into(this)
+    try{
+        Glide.with(this.context)
+            .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .into(this)
+    } catch (ex: GlideException){
+        this.setImageResource(R.drawable.wind_icon)
+    }
+
 }
 /**
  *  Formats the date with the English Locale

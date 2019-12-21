@@ -32,10 +32,10 @@ private val retrofit = Retrofit.Builder()
  * interface used by retrofit to implement API calls
  */
 interface GustFinderApiService {
-    @GET("premium/v1/search.ashx?key=4e2cb7498c154ab9a3d155550191811&num_of_results=5&format=json")
+    @GET("premium/v1/search.ashx?key=74b95912704f488f9ef152910191412&num_of_results=5&format=json")
     fun getLocationSearchResultsAsync(@Query("query") query: String): Deferred<ApiSearchResponse>
 
-    @GET("premium/v1/marine.ashx?key=4e2cb7498c154ab9a3d155550191811&format=json")
+    @GET("premium/v1/marine.ashx?key=74b95912704f488f9ef152910191412&format=json")
     fun getForecastAsync(@Query("q") query: String): Deferred<ApiWeatherResponse>
 }
 /**

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
@@ -143,24 +144,7 @@ class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
             )
         )
         imageView.check(matches(isDisplayed()))
-
-        val appCompatImageButton = onView(
-            allOf(
-                withContentDescription("Navigate up"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.action_bar),
-                        childAtPosition(
-                            withId(R.id.action_bar_container),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatImageButton.perform(click())
+        Espresso.pressBack()
         Thread.sleep(5000)
         val appCompatImageView = onView(
             allOf(
