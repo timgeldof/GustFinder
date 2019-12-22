@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.database.Place
-import com.timgeldof.gustfinder.database.PlaceDatabaseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,7 +14,7 @@ import kotlinx.coroutines.launch
 /**
  * Subclass of the [ViewModel] class
  */
-class UserPlacesViewModel(val database: PlaceDatabaseDao) : ViewModel() {
+class UserPlacesViewModel(val repository: GustRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -23,8 +22,6 @@ class UserPlacesViewModel(val database: PlaceDatabaseDao) : ViewModel() {
     private val _navigateToSelectedPlace = MutableLiveData<Place>()
     val navigateToSelectedPlace: LiveData<Place>
         get() = _navigateToSelectedPlace
-
-    val repository: GustRepository = GustRepository(database)
 
     private var _myPlaces: LiveData<List<Place>>
     val myPlaces: LiveData<List<Place>>

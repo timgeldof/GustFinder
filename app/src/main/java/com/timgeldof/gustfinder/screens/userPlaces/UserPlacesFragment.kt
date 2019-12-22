@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.databinding.UserPlacesFragmentBinding
 
 /**
@@ -28,8 +29,8 @@ class UserPlacesFragment : Fragment() {
             R.layout.user_places_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
-        val viewModelFactory = UserPlacesViewModelFactory(dataSource)
+        val repository = GustRepository(GustDatabase.getInstance(application).placeDatabaseDao)
+        val viewModelFactory = UserPlacesViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserPlacesViewModel::class.java)
 
         binding.lifecycleOwner = this
