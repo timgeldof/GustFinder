@@ -10,11 +10,11 @@ import androidx.room.Query
 @Dao
 interface PlaceDatabaseDao {
     /**
-     * @param key The primary key for the place table in the database
-     * @return returns [LiveData] that wraps a Place object
+     * @param area The area of the place
+     * @return returns a Place object
      */
-    @Query("SELECT * from places_table WHERE placeId = :key")
-    fun get(key: Long): LiveData<Place>
+    @Query("SELECT * from places_table WHERE area = :area LIMIT 1")
+    fun get(area: String): Place
     /**
      * @param place Place that has to be inserted into the places_table in the database
      * @return returns [LiveData] that wraps a Place object
