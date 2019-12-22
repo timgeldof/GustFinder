@@ -5,10 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.database.PlaceDatabaseDao
 import com.timgeldof.gustfinder.network.models.searchApi.ApiSearchResponse
-import com.timgeldof.gustfinder.network.service.GustFinderApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,7 +23,7 @@ enum class ApiStatus { LOADING, ERROR, DONE }
  * @param application
  * @sample com.mycompany.SomethingTest.simple
  */
-class AddPlaceViewModel(val database: PlaceDatabaseDao) : ViewModel() {
+class AddPlaceViewModel(val repository: GustRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -52,7 +52,7 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao) : ViewModel() {
                 try {
                     _status.value = ApiStatus.LOADING
                     Log.i("API", query)
-                    _response.value = GustFinderApi.retrofitService.getLocationSearchResultsAsync(query).await()
+                    _response.value = GustRepository.getSearchResults(query).await()
                     _status.value = ApiStatus.DONE
                 } catch (t: Throwable) {
                     _status.value = ApiStatus.ERROR
@@ -67,7 +67,7 @@ class AddPlaceViewModel(val database: PlaceDatabaseDao) : ViewModel() {
      */
     suspend fun insertPlaceIntoDatabase(place: Place) {
         withContext(Dispatchers.IO) {
-            database.insert(place)
+            repository.insertPlace(place)
         }
     }
 

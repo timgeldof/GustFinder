@@ -1,10 +1,8 @@
 package com.timgeldof.gustfinder
 
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -15,15 +13,16 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withClassName
-import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.timgeldof.gustfinder.database.GustDatabase
-import com.timgeldof.gustfinder.database.Place
-import com.timgeldof.gustfinder.database.PlaceDatabaseDao
 import com.timgeldof.gustfinder.network.networkAvailable
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -52,7 +51,7 @@ class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
         uiScope.launch {
             clearDatabase()
         }
-        if(networkAvailable(GustApplication.applicationContext())){
+        if (networkAvailable(GustApplication.applicationContext())) {
             val appCompatTextView = onView(
             allOf(
                 withId(R.id.text_my_places), withText("My places"),
@@ -188,5 +187,4 @@ class AddTarifaToMyPlacesCheckTheDetailForecastAndRemoveTarifaFromMyPlaces {
             database.clear()
         }
     }
-
 }

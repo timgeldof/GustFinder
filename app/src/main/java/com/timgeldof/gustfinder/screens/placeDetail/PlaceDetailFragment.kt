@@ -15,13 +15,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.timgeldof.gustfinder.R
-import com.timgeldof.gustfinder.database.realm.RealmWeather
+import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.databinding.PlaceDetailFragmentBinding
-import io.realm.Realm
-import io.realm.RealmResults
-import io.realm.RealmChangeListener
-
-
 
 /**
  * A simple [Fragment] subclass.
@@ -35,7 +31,8 @@ class PlaceDetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val place = PlaceDetailFragmentArgs.fromBundle(arguments!!).selectedPlace
-        val viewModelFactory = PlaceDetailViewModelFactory(place)
+        val repository = GustRepository(GustDatabase.getInstance(context!!).placeDatabaseDao)
+        val viewModelFactory = PlaceDetailViewModelFactory(place, repository)
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlaceDetailViewModel::class.java)
         this.viewModel = viewModel
         binding.placeDetailViewModel = viewModel

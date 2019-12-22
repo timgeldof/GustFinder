@@ -1,6 +1,5 @@
 package com.timgeldof.gustfinder
 
-import android.content.res.Resources
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
@@ -32,8 +31,8 @@ import java.util.Locale
                 ApiStatus.ERROR -> {
                     this.visibility = View.VISIBLE
                     setImageResource(R.drawable.empty_box)
-                    if(status == ApiStatus.ERROR){
-                        if(!networkAvailable(this.context!!)){
+                    if (status == ApiStatus.ERROR) {
+                        if (!networkAvailable(this.context!!)) {
                             Toast.makeText(this.context!!, "Internet not available", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -50,15 +49,14 @@ import java.util.Locale
  */
 @BindingAdapter("glideSrc")
 fun ImageView.setResource(url: String?) {
-    try{
+    try {
         Glide.with(this.context)
             .load(url)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .into(this)
-    } catch (ex: GlideException){
+    } catch (ex: GlideException) {
         this.setImageResource(R.drawable.wind_icon)
     }
-
 }
 /**
  *  Formats the date with the English Locale

@@ -10,6 +10,6 @@ open class RealmAstronomy(
     var moonset: String,
     var moon_phase: String,
     var moon_illumination: Int
-): RealmObject(){
-    constructor() : this("","","","","",0)
+) : RealmObject() {
+    constructor() : this("", "", "", "", "", 0)
 }

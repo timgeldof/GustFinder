@@ -27,33 +27,33 @@ class RealmHourlyTest {
     }
 
     @Test
-    fun checkGustSpeedFormat(){
+    fun checkGustSpeedFormat() {
         Assert.assertEquals(hourly!!.getWindGustFormatted(), "${hourly!!.windGustKmph} km/h")
     }
     @Test
-    fun checkEmptyGustFormatResult(){
+    fun checkEmptyGustFormatResult() {
         hourly!!.windGustKmph = null
         Assert.assertEquals(hourly!!.getWindGustFormatted(), "-")
         hourly!!.windGustKmph = 15
     }
     @Test
-    fun checkTemperatureFormat(){
+    fun checkTemperatureFormat() {
         Assert.assertEquals(hourly!!.getTempFormatted(), "${hourly!!.tempC} °C")
     }
     @Test
-    fun checkWaterTempFormat(){
+    fun checkWaterTempFormat() {
         Assert.assertEquals(hourly!!.getWaterTempFormatted(), "${hourly!!.waterTemp_C} °C")
     }
     @Test
-    fun checkSwellHeightFormat(){
+    fun checkSwellHeightFormat() {
         Assert.assertEquals(hourly!!.getSwellHeightFormatted(), "${hourly!!.swellHeight_m} m")
     }
     @Test
-    fun checkSwellDirFormat(){
+    fun checkSwellDirFormat() {
         Assert.assertEquals(hourly!!.getSwellDir16point(), "NNW")
     }
     @Test
-    fun checkEmptySwellDirFormatResult(){
+    fun checkEmptySwellDirFormatResult() {
         hourly!!.swellDir16Point = null
         Assert.assertEquals(hourly!!.getSwellDir16point(), "-")
         hourly!!.swellDir16Point = "NNW"

@@ -17,19 +17,16 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class PlaceUnitTests {
 
-
     private lateinit var database: GustDatabase
     private lateinit var placeDao: PlaceDatabaseDao
 
-
     @Before
-    fun setUpDataBase(){
+    fun setUpDataBase() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         database = Room.inMemoryDatabaseBuilder(context, GustDatabase::class.java)
             .allowMainThreadQueries()
             .build()
         placeDao = database.placeDatabaseDao
-
     }
 
     @After
@@ -40,26 +37,20 @@ class PlaceUnitTests {
 
     @Test
     fun insertPlace() {
-        val placeInMemory = Place("Kortrijk","Belgie","West-Vlaanderen","50.3","30.4")
+        val placeInMemory = Place("Kortrijk", "Belgie", "West-Vlaanderen", "50.3", "30.4")
         placeDao.insert(placeInMemory)
         val PlaceFromDB = placeDao.get("Kortrijk")
         Assert.assertEquals(placeInMemory.area, PlaceFromDB.area)
         placeDao.clear()
     }
 
-
     @Test
     fun deletePlace() {
-        val placeInMemory = Place("Izegem","Belgie","West-Vlaanderen","50.3","23.4")
+        val placeInMemory = Place("Izegem", "Belgie", "West-Vlaanderen", "50.3", "23.4")
         placeDao.insert(placeInMemory)
         val PlaceFromDB = placeDao.get("Izegem")
         Assert.assertEquals(placeInMemory.area, PlaceFromDB.area)
         placeDao.clear()
         Assert.assertNull(placeDao.get("Izegem"))
     }
-
-
-
-
-
 }

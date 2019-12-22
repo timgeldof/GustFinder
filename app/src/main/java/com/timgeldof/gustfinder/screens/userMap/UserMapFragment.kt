@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.databinding.MyPlacesMapFragmentBinding
 
@@ -35,8 +36,8 @@ class UserMapFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         binding = MyPlacesMapFragmentBinding.inflate(inflater, container, false)
-        val database = GustDatabase.getInstance(context!!).placeDatabaseDao
-        val viewModelFactory = UserMapViewModelFactory(database)
+        val repository = GustRepository(GustDatabase.getInstance(context!!).placeDatabaseDao)
+        val viewModelFactory = UserMapViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserMapViewModel::class.java)
         return binding.root
     }

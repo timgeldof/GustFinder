@@ -3,8 +3,6 @@ package com.timgeldof.gustfinder.network
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.util.Log
-
 
 /**
  * Code directly copied from android developer documentation

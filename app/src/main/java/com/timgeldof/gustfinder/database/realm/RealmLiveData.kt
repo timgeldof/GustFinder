@@ -5,7 +5,6 @@ import io.realm.RealmChangeListener
 import io.realm.RealmModel
 import io.realm.RealmResults
 
-
 // SOURCE: https://proandroiddev.com/the-realm-of-kotlin-and-live-data-using-mvp-architecture-f04fc41c914e
 class RealmLiveData <T : RealmModel>(val realmResults: RealmResults<T>) : LiveData<RealmResults<T>>() {
 

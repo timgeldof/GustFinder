@@ -1,11 +1,9 @@
 // https://realm.io/docs/java/latest/#jackson-databind
-package io.reactivex;
+package io.reactivex
 
-class Flowable {
-}
+class Flowable
 
-class Observable {
-}
+class Observable
 
 enum class BackpressureStrategy {
     LATEST;

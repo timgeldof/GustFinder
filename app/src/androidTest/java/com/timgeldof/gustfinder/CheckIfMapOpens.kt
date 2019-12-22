@@ -1,36 +1,27 @@
 package com.timgeldof.gustfinder
 
-
-import androidx.test.espresso.DataInteraction
-import androidx.test.espresso.ViewInteraction
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 
-import androidx.test.InstrumentationRegistry.getInstrumentation
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.matcher.ViewMatchers.*
-
-import com.timgeldof.gustfinder.R
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
-import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.anything
 import org.hamcrest.Matchers.`is`
 
 @LargeTest
@@ -75,7 +66,8 @@ class CheckIfMapOpens {
     }
 
     private fun childAtPosition(
-        parentMatcher: Matcher<View>, position: Int
+        parentMatcher: Matcher<View>,
+        position: Int
     ): Matcher<View> {
 
         return object : TypeSafeMatcher<View>() {
@@ -86,8 +78,8 @@ class CheckIfMapOpens {
 
             public override fun matchesSafely(view: View): Boolean {
                 val parent = view.parent
-                return parent is ViewGroup && parentMatcher.matches(parent)
-                        && view == parent.getChildAt(position)
+                return parent is ViewGroup && parentMatcher.matches(parent) &&
+                        view == parent.getChildAt(position)
             }
         }
     }

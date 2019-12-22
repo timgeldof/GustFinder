@@ -1,7 +1,5 @@
 package com.timgeldof.gustfinder.database.realm
 
-import com.timgeldof.gustfinder.network.models.marineWeatherApi.WeatherDesc
-import com.timgeldof.gustfinder.network.models.marineWeatherApi.WeatherIconUrl
 import io.realm.RealmList
 import io.realm.RealmObject
 
@@ -16,10 +14,9 @@ open class RealmHourly(
     var swellDir16Point: String?, // relevant
     var swellPeriod_secs: Double?, // relevant
     var waterTemp_C: Int? // relevant
-): RealmObject() {
+) : RealmObject() {
 
-    constructor(): this(0,0,0,"",RealmList<RealmWeatherIconUrl>(),0,0.0,null,0.0,null)
-
+    constructor() : this(0, 0, 0, "", RealmList<RealmWeatherIconUrl>(), 0, 0.0, null, 0.0, null)
 
     fun getTempFormatted(): String {
         return tempC.toString() + " °C"
@@ -72,7 +69,7 @@ open class RealmHourly(
                 "Wind direction: " + getWindDir16point() + "\n" +
                 "Wind gust speed: " + getWindGustFormatted() + "\n" +
                 "Swell height: " + getSwellHeightFormatted() + "\n" +
-                "Swell direction: " + getSwellDir16point() + "\n"+
+                "Swell direction: " + getSwellDir16point() + "\n" +
                 "Water temperature: " + getWaterTempFormatted() + "\n"
     }
 }

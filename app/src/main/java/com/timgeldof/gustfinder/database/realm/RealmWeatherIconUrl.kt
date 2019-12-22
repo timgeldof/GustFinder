@@ -8,6 +8,6 @@ import io.realm.RealmObject
 open class RealmWeatherIconUrl(
 
     var value: String
-): RealmObject(){
+) : RealmObject() {
     constructor() : this("")
 }

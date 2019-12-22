@@ -7,15 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.database.GustDatabase
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.databinding.AddPlaceFragmentBinding
-import com.timgeldof.gustfinder.network.networkAvailable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -37,10 +36,9 @@ class AddPlaceFragment : Fragment() {
         binding = DataBindingUtil.inflate<AddPlaceFragmentBinding>(inflater,
             R.layout.add_place_fragment, container, false)
         val application = requireNotNull(this.activity).application
-        val dataSource = GustDatabase.getInstance(application).placeDatabaseDao
         binding.setLifecycleOwner(this)
 
-        val viewModelFactory = AddPlaceViewModelFactory(dataSource)
+        val viewModelFactory = AddPlaceViewModelFactory(GustRepository(GustDatabase.getInstance(application).placeDatabaseDao))
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddPlaceViewModel::class.java)
         binding.viewModel = viewModel
 

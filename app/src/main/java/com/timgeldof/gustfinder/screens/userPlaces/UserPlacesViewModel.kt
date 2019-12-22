@@ -3,6 +3,7 @@ package com.timgeldof.gustfinder.screens.userPlaces
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.database.PlaceDatabaseDao
 import kotlinx.coroutines.CoroutineScope
@@ -23,12 +24,14 @@ class UserPlacesViewModel(val database: PlaceDatabaseDao) : ViewModel() {
     val navigateToSelectedPlace: LiveData<Place>
         get() = _navigateToSelectedPlace
 
+    val repository: GustRepository = GustRepository(database)
+
     private var _myPlaces: LiveData<List<Place>>
     val myPlaces: LiveData<List<Place>>
             get() = _myPlaces
 
     init {
-        _myPlaces = database.getAllPlaces()
+        _myPlaces = repository.getAllPlaces()
     }
 
     override fun onCleared() {
@@ -53,7 +56,7 @@ class UserPlacesViewModel(val database: PlaceDatabaseDao) : ViewModel() {
      */
     private suspend fun removePlace(place: Place) {
         withContext(Dispatchers.IO) {
-            database.removePlace(place.placeId)
+            repository.removePlace(place.placeId)
         }
     }
     /**
@@ -61,7 +64,7 @@ class UserPlacesViewModel(val database: PlaceDatabaseDao) : ViewModel() {
      */
     fun getPlacesFromDB() {
         uiScope.launch {
-            _myPlaces = database.getAllPlaces()
+            _myPlaces = repository.getAllPlaces()
         }
     }
     /**

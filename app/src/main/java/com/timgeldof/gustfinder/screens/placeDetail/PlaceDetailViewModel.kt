@@ -4,17 +4,12 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.timgeldof.gustfinder.GustApplication
-import com.timgeldof.gustfinder.database.GustDatabase
 import com.timgeldof.gustfinder.database.GustRepository
 import com.timgeldof.gustfinder.database.Place
 import com.timgeldof.gustfinder.database.realm.RealmWeather
-import com.timgeldof.gustfinder.network.models.marineWeatherApi.Weather
-import com.timgeldof.gustfinder.network.service.GustFinderApi
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus.DONE
 import com.timgeldof.gustfinder.screens.addPlace.ApiStatus.LOADING
-import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,26 +20,17 @@ import kotlinx.coroutines.launch
  *
  * @param place the place of which the details need to be shown
  */
-class PlaceDetailViewModel(val place: Place) : ViewModel() {
+class PlaceDetailViewModel(val place: Place, repository: GustRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val _weather = MutableLiveData<List<Weather>>()
-
-    val weather: LiveData<List<Weather>>
-        get() = _weather
-
 
     private val _status = MutableLiveData<ApiStatus>()
 
     val status: LiveData<ApiStatus>
         get() = _status
 
-    private val database = GustDatabase.getInstance(GustApplication.applicationContext())
-    private val repository = GustRepository(database)
-
-    private val _dbWeather : LiveData<RealmResults<RealmWeather>> = repository.getWeather(place)
+    private val _dbWeather: LiveData<RealmResults<RealmWeather>> = repository.getWeather(place)
 
     val dbWeather: LiveData<RealmResults<RealmWeather>>
     get() = _dbWeather
@@ -53,25 +39,12 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
         _status.value = DONE
         uiScope.launch {
             _status.value = LOADING
-            repository.refreshWeather(place)
-            _status.value = DONE
-        }
-
-        //_status.value = ApiStatus.ERROR
-    }
-    /**
-     * Sets the weather [LiveData] value to the response of the api
-     */
-    private fun getForecasts() {
-        val latAndLon = place.latitude + "," + place.longitude
-        uiScope.launch {
             try {
-                _status.value = ApiStatus.LOADING
-                _weather.value = GustFinderApi.retrofitService.getForecastAsync(latAndLon).await().data.weather
-                _status.value = DONE
-            } catch (t: Throwable) {
+                repository.refreshWeather(place)
+            } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
             }
+            _status.value = DONE
         }
     }
 
@@ -90,7 +63,6 @@ class PlaceDetailViewModel(val place: Place) : ViewModel() {
                             "15:00\n${dbWeather.value!![0]!!.hourly[5]!!.getSurfStatistics()}\n" +
                             "18:00\n${dbWeather.value!![0]!!.hourly[6]!!.getSurfStatistics()}\n")
                 type = "text/plain"
-
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
         return shareIntent

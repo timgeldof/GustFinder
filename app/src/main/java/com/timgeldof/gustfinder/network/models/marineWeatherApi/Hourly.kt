@@ -1,7 +1,6 @@
 package com.timgeldof.gustfinder.network.models.marineWeatherApi
 
 import com.timgeldof.gustfinder.database.realm.RealmWeatherIconUrl
-import io.realm.Realm
 import io.realm.RealmList
 
 /**

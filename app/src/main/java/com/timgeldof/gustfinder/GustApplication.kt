@@ -29,9 +29,8 @@ class GustApplication : Application() {
     companion object {
         private var instance: GustApplication? = null
 
-        fun applicationContext() : Context {
+        fun applicationContext(): Context {
             return instance!!.applicationContext
         }
     }
-
 }
