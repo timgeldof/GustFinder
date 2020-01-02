@@ -35,7 +35,6 @@ class GustRepository(val database: PlaceDatabaseDao) {
             var realmWeather = RealmList<RealmWeather>()
 
             val weatherList = GustFinderApi.retrofitService.getForecastAsync(latAndLon).await().data.weather
-            realmWeather = RealmList<RealmWeather>()
             for (weather in weatherList) {
                 realmWeather.add(weather.weatherAsRealmModel(place))
             }

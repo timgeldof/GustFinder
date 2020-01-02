@@ -44,7 +44,7 @@ class NewsFragment : Fragment() {
         webView.settings.domStorageEnabled = true
         webView.settings.javaScriptEnabled = true
 
-        webView.setOnKeyListener(View.OnKeyListener() { v: View, keyCode: Int, event: KeyEvent ->
+        webView.setOnKeyListener(View.OnKeyListener() { _: View, keyCode: Int, event: KeyEvent ->
             var returnValue = false
             if (event.getAction() != KeyEvent.ACTION_DOWN)
                 returnValue = true

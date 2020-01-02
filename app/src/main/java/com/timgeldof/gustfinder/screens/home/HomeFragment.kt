@@ -14,7 +14,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.timgeldof.gustfinder.R
 import com.timgeldof.gustfinder.databinding.HomeFragmentBinding
-import io.realm.Realm
 
 /**
  * First [Fragment] in the navhost fragment which contains a menu for navigation
@@ -29,8 +28,6 @@ class HomeFragment : Fragment() {
         binding.textMyMap.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_userMapFragment))
         binding.textInterestingResources.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_newsFragment))
         setHasOptionsMenu(true)
-
-        val realm = Realm.getDefaultInstance()
 
         return binding.root
     }

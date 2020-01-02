@@ -50,10 +50,8 @@ class UserMapFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         mapView = binding.mapView
-        if (mapView != null) {
-            mapView.onCreate(null)
-            mapView.getMapAsync(this)
-        }
+        mapView.onCreate(null)
+        mapView.getMapAsync(this)
     }
 
     override fun onResume() {

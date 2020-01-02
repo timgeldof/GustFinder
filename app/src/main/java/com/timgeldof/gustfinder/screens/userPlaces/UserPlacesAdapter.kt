@@ -19,7 +19,6 @@ class UserPlacesAdapter(private val onClickDetailListener: OnClickListener, priv
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = PlaceItemBinding.inflate(layoutInflater, parent, false)
-        val view = layoutInflater.inflate(R.layout.place_item, parent, false)
         return PlaceViewHolder(binding)
     }
 
