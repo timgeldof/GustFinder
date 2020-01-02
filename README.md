@@ -32,8 +32,7 @@ run the app
 
 ## Running the tests
 
-No tests provided yet
-
+The tests (unit and ui) can be run with android studio, seperately
 
 ## Deployment
 
@@ -50,4 +49,4 @@ Add additional notes about how to deploy this on a live system
 ## Acknowledgments
 
 * Udacity offers a great course for basic android development
-* Jens Buysse, my android lector, was always ready to help out with problems and pointed some interesting things out about the android framework
+* Jens Buysse, my android lector, was always ready to help out with problems and pointed some interesting, important things out about the android framework that are not mentioned in many tutorials or courses

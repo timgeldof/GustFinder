@@ -22,7 +22,6 @@ class GustApplication : Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        val context: Context = applicationContext()
         Realm.init(this)
     }
 
